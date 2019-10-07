@@ -28,6 +28,20 @@
 
 namespace NetworKit {
 
+#ifdef NETWORKIT_U32_NODES
+	/**
+	 * Data type of nodes inside adjacency lists.
+	 * This is an internal detail of NetworKit; there is no need for users to use this type.
+	 */
+	using storednode = uint32_t;
+#else
+	/**
+	 * Data type of nodes inside adjacency lists.
+	 * This is an internal detail of NetworKit; there is no need for users to use this type.
+	 */
+	using storednode = node;
+#endif
+
 /**
  * A weighted edge used for the graph constructor with
  * initializer list syntax.
@@ -127,10 +141,10 @@ class Graph final {
 
     //!< only used for directed graphs, inEdges[v] contains all nodes u that
     //!< have an edge (u, v)
-    std::vector<std::vector<node>> inEdges;
+    std::vector<std::vector<storednode>> inEdges;
     //!< (outgoing) edges, for each edge (u, v) v is saved in outEdges[u] and
     //!< for undirected also u in outEdges[v]
-    std::vector<std::vector<node>> outEdges;
+    std::vector<std::vector<storednode>> outEdges;
 
     //!< only used for directed graphs, same schema as inEdges
     std::vector<std::vector<edgeweight>> inEdgeWeights;
@@ -469,7 +483,7 @@ public:
         // Own type.
         using self = NeighborIterator;
 
-        NeighborIterator(std::vector<node>::const_iterator nodesIter) : nIter(nodesIter) {}
+        NeighborIterator(std::vector<storednode>::const_iterator nodesIter) : nIter(nodesIter) {}
 
         /**
          * @brief WARNING: This contructor is required for Python and should not be used as the iterator is not initialised.
@@ -509,7 +523,7 @@ public:
         node operator*() const { return *nIter; }
 
       private:
-        std::vector<node>::const_iterator nIter;
+        std::vector<storednode>::const_iterator nIter;
     };
 
     /**
@@ -540,7 +554,7 @@ public:
         using self = NeighborWeightIterator;
 
         NeighborWeightIterator(
-            std::vector<node>::const_iterator nodesIter,
+            std::vector<storednode>::const_iterator nodesIter,
             std::vector<edgeweight>::const_iterator weightIter)
             : nIter(nodesIter), wIter(weightIter) {}
 
@@ -583,7 +597,7 @@ public:
         }
 
       private:
-        std::vector<node>::const_iterator nIter;
+        std::vector<storednode>::const_iterator nIter;
         std::vector<edgeweight>::const_iterator wIter;
     };
 

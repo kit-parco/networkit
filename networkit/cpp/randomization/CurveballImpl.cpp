@@ -21,11 +21,11 @@ namespace CurveballDetails {
 
 using degree_vector = std::vector<count>;
 using trade_vector = std::vector<trade_descriptor>;
-using neighbour_vector = std::vector<node>;
+using neighbour_vector = std::vector<storednode>;
 using node_vector = std::vector<node>;
 using nodepair_vector = std::vector<std::pair<node, node>>;
 
-using neighbour_vector = std::vector<node>;
+using neighbour_vector = std::vector<storednode>;
 using degree_vector = std::vector<count>;
 using degree_it = std::vector<count>::const_iterator;
 using pos_vector = std::vector<edgeid>;
@@ -146,7 +146,7 @@ void CurveballMaterialization::toGraphParallel(Graph &G) {
 	std::vector<count> missingEdgesCounts(numNodes, 0);
 
 	std::vector<std::vector<edgeweight>> new_edgeWeights(numNodes);
-	std::vector<std::vector<node>> new_outEdges(numNodes);
+	std::vector<std::vector<storednode>> new_outEdges(numNodes);
 	std::vector<count> outDeg(numNodes);
 
 	// Add first half of edges and count missing edges for each node
@@ -203,7 +203,7 @@ void CurveballMaterialization::toGraphSequential(Graph &G) {
 	missingEdgesCounts.reserve(numNodes);
 
 	std::vector<std::vector<edgeweight>> new_edgeWeights(numNodes);
-	std::vector<std::vector<node>> new_outEdges(numNodes);
+	std::vector<std::vector<storednode>> new_outEdges(numNodes);
 	std::vector<count> outDeg(numNodes);
 
 	// Add first half of edges and count missing edges for each node

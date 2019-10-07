@@ -12,6 +12,25 @@
 
 namespace NetworKit {
 
+template<typename X, typename Y>
+static void swapTransform(std::vector<X> &vecX, std::vector<Y> &vecY) {
+	std::vector<X> temp;
+	temp.swap(vecX);
+	// Copy from vecX to vecY.
+	vecX.resize(vecY.size());
+	std::copy(vecY.begin(), vecY.end(), vecX.begin());
+	// Copy from temp (= old vecX) to vecY.
+	vecY.clear();
+	vecY.resize(temp.size());
+	std::copy(temp.begin(), temp.end(), vecY.begin());
+}
+
+// More specific overload of the function above.
+template<typename X>
+static void swapTransform(std::vector<X> &vecX, std::vector<X> &vecY) {
+	vecX.swap(vecY);
+}
+
 GraphBuilder::GraphBuilder(count n, bool weighted, bool directed)
     : n(n), selfloops(0), name(""), weighted(weighted), directed(directed),
       outEdges(n), outEdgeWeights(weighted ? n : 0), inEdges(directed ? n : 0),
@@ -21,9 +40,9 @@ void GraphBuilder::reset(count n) {
 	this->n = n;
 	selfloops = 0;
 	name = "";
-	outEdges.assign(n, std::vector<node>{});
+	outEdges.assign(n, std::vector<storednode>{});
 	outEdgeWeights.assign(isWeighted() ? n : 0, std::vector<edgeweight>{}),
-	    inEdges.assign(isDirected() ? n : 0, std::vector<node>{}),
+	    inEdges.assign(isDirected() ? n : 0, std::vector<storednode>{}),
 	    inEdgeWeights.assign((isDirected() && isWeighted()) ? n : 0,
 	                         std::vector<edgeweight>{});
 }
@@ -50,12 +69,12 @@ index GraphBuilder::indexInInEdgeArray(node u, node v) const {
 }
 
 node GraphBuilder::addNode() {
-	outEdges.push_back(std::vector<node>{});
+	outEdges.push_back(std::vector<storednode>{});
 	if (weighted) {
 		outEdgeWeights.push_back(std::vector<edgeweight>{});
 	}
 	if (directed) {
-		inEdges.push_back(std::vector<node>{});
+		inEdges.push_back(std::vector<storednode>{});
 		if (weighted) {
 			inEdgeWeights.push_back(std::vector<edgeweight>{});
 		}
@@ -92,7 +111,7 @@ void GraphBuilder::swapNeighborhood(node u, std::vector<node> &neighbours,
                                     bool selfloop) {
 	if (weighted)
 		assert(neighbours.size() == weights.size());
-	outEdges[u].swap(neighbours);
+	swapTransform(outEdges[u], neighbours);
 	if (weighted) {
 		outEdgeWeights[u].swap(weights);
 	}
@@ -201,7 +220,7 @@ void GraphBuilder::toGraphParallel(Graph &G) {
 
 	int maxThreads = omp_get_max_threads();
 
-	using Adjacencylists = std::vector<std::vector<node>>;
+	using Adjacencylists = std::vector<std::vector<storednode>>;
 	using Weightlists = std::vector<std::vector<edgeweight>>;
 
 	std::vector<Adjacencylists> inEdgesPerThread(maxThreads, Adjacencylists(n));

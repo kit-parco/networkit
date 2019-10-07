@@ -19,6 +19,7 @@ option(NETWORKIT_COVERAGE "Build with support for coverage" OFF)
 set(NETWORKIT_PYTHON "" CACHE STRING "Directory containing Python.h. Implies MONOLITH=TRUE")
 set(NETWORKIT_PYTHON_SOABI "" CACHE STRING "Platform specific file extension. Implies MONOLITH=TRUE")
 set(NETWORKIT_WITH_SANITIZERS "" CACHE STRING "Uses sanitizers during the compilation")
+set(NETWORKIT_NODE_STORAGE "u64" CACHE STRING "Override node storage data type of NetworKit graphs (u64/u32) [affects ABI, define NETWORKIT_U32_NODES]")
 set(NETWORKIT_RELEASE_LOGGING "AUTO" CACHE STRING "Do not compile log messages at levels TRACE or DEBUG (AUTO|ON|OFF)")
 set(NETWORKIT_PYTHON_RPATH "" CACHE STRING "Build specific rpath references.")
 
@@ -53,6 +54,12 @@ endif()
 # Compilation Flags
 set(NETWORKIT_CXX_FLAGS "")
 set(NETWORKIT_LINK_FLAGS "")
+
+if (NETWORKIT_NODE_STORAGE STREQUAL "u32")
+	set(NETWORKIT_CXX_FLAGS "${NETWORKIT_CXX_FLAGS} -DNETWORKIT_U32_NODES")
+elseif(NOT NETWORKIT_NODE_STORAGE STREQUAL "u64")
+	message(FATAL_ERROR "Unsupported setting ${NETWORKIT_NODE_STORAGE} for NETWORKIT_NODE_STORAGE")
+endif()
 
 if (NETWORKIT_QUIET_LOGGING)
 	set(NETWORKIT_CXX_FLAGS "-DNETWORKIT_QUIET_LOGGING")

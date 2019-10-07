@@ -49,13 +49,13 @@ private:
 	bool weighted; //!< true if the graph will be weighted, false otherwise
 	bool directed; //!< true if the graph will be directed, false otherwise
 
-	std::vector<std::vector<node>>
+	std::vector<std::vector<storednode>>
 	    outEdges; //!< (outgoing) edges, for each edge (u, v) v is saved in
 	              //!< outEdges[u] and for undirected also u in outEdges[v]
 	std::vector<std::vector<edgeweight>>
 	    outEdgeWeights; //!< same schema (and same order!) as outEdges
 
-	std::vector<std::vector<node>>
+	std::vector<std::vector<storednode>>
 	    inEdges; //!< only used for directed graphs, inEdges[v] contains all nodes
 	             //!< u that have an edge (u, v)
 	std::vector<std::vector<edgeweight>>

@@ -392,7 +392,7 @@ void Graph::compactEdges() {
 }
 
 void Graph::sortEdges() {
-	std::vector<std::vector<node>> targetAdjacencies(upperNodeIdBound());
+	std::vector<std::vector<storednode>> targetAdjacencies(upperNodeIdBound());
 	std::vector<std::vector<edgeweight>> targetWeight;
 	std::vector<std::vector<edgeid>> targetEdgeIds;
 
@@ -536,6 +536,7 @@ node Graph::addNode() {
 	node v = z; // node gets maximum id
 	z++;        // increment node range
 	n++;        // increment node count
+	assert(v == static_cast<node>(std::numeric_limits<storednode>::max()));
 
 	// update per node data structures
 	exists.push_back(true);
@@ -548,9 +549,9 @@ node Graph::addNode() {
 		outEdgeWeights.push_back(edgeWeight);
 	}
 
-	outEdges.push_back(std::vector<node>{});
+	outEdges.push_back(std::vector<storednode>{});
 	if (directed) {
-		inEdges.push_back(std::vector<node>{});
+		inEdges.push_back(std::vector<storednode>{});
 	}
 
 	return v;
@@ -767,7 +768,7 @@ void Graph::removeEdge(node u, node v) {
 	}
 
 	m--; // decrease number of edges
-	erase<node>(u, vi, outEdges);
+	erase<storednode>(u, vi, outEdges);
 	if (weighted) {
 		erase<edgeweight>(u, vi, outEdgeWeights);
 	}
@@ -775,13 +776,13 @@ void Graph::removeEdge(node u, node v) {
 	if (directed) {
 		assert(ui != none);
 
-		erase<node>(v, ui, inEdges);
+		erase<storednode>(v, ui, inEdges);
 		if (weighted) {
 			erase<edgeweight>(v, ui, inEdgeWeights);
 		}
 	} else if (u != v) {
 		// undirected, not self-loop
-		erase<node>(v, ui, outEdges);
+		erase<storednode>(v, ui, outEdges);
 		if (weighted) {
 			erase<edgeweight>(v, ui, outEdgeWeights);
 		}
