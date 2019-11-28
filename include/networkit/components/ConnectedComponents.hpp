@@ -17,6 +17,12 @@
 #include <networkit/base/Algorithm.hpp>
 
 namespace NetworKit {
+    struct cc_result {
+        node* components;
+        node n_nodes;
+        node* component_sizes;
+        node n_components;
+    };
 
 /**
  * @ingroup components
@@ -76,6 +82,7 @@ public:
      * (i.e. re-numbered from 0 to n-1). If false, the node ids will not be changed.
      */
     static Graph extractLargestConnectedComponent(const Graph &G, bool compactGraph = false);
+    static cc_result get_raw_partition(const Graph &G);
 
 private:
     const Graph& G;

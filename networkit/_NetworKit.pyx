@@ -1,15 +1,14 @@
 
 # cython: language_level=3
 
-#includes
-# needed for collections.Iterable
-from networkit.exceptions import ReducedFunctionalityWarning
 import collections
 import math
 import os
 import tempfile
 import warnings
-
+#includes
+# needed for collections.Iterable
+from networkit.exceptions import ReducedFunctionalityWarning
 
 try:
 	import pandas
@@ -46,6 +45,73 @@ ctypedef index node
 ctypedef index cluster
 ctypedef double edgeweight
 ctypedef double coordinate
+
+
+import numpy as np
+
+# "cimport" is used to import special compile-time information
+# about the numpy module (this is stored in a file numpy.pxd which is
+# currently part of the Cython distribution).
+cimport numpy as np
+cimport cython
+from libc.stdlib cimport free
+from cpython cimport PyObject, Py_INCREF
+# Numpy must be initialized. When using numpy from C or Cython you must
+# _always_ do that, or you will have segfaults
+np.import_array()
+
+# In order to transfer the ownership from C to python,
+# this class takes the C pointer and knows how to clean
+# up once the python object goes out of scope.
+# The wrapper code is taken from here: https://gist.github.com/GaelVaroquaux/1249305
+
+cdef class ArrayWrapper:
+	cdef void* data_ptr
+	cdef index size
+
+	cdef set_data(self, index size, void* data_ptr):
+		""" Set the data of the array
+	
+		This cannot be done in the constructor as it must recieve C-level
+		arguments.
+	
+		Parameters:
+		-----------
+		size: int
+			Length of the array.
+		data_ptr: void*
+			Pointer to the data            
+	
+		"""
+		self.data_ptr = data_ptr
+		self.size = size
+
+	def __array__(self):
+		""" Here we use the __array__ method, that is called when numpy
+		    tries to get an array from the object."""
+		cdef np.npy_intp shape[1]
+		shape[0] = <np.npy_intp> self.size
+		# Create a 1D array, of length 'size'
+		ndarray = np.PyArray_SimpleNewFromData(1, shape,
+		                                       np.NPY_UINT64, self.data_ptr)
+		return ndarray
+
+	cdef as_ndarray(self, index size, void* data_ptr):
+		cdef np.ndarray ndarray
+		self.set_data(size, data_ptr)
+		ndarray = np.array(self, copy=False)
+		# Assign our object to the 'base' of the ndarray object
+		ndarray.base = <PyObject*> self
+		# Increment the reference count, as the above assignement was done in
+		# C, and Python does not know that there is this additional reference
+		Py_INCREF(self)
+		return ndarray
+
+	def __dealloc__(self):
+		""" Frees the array. This is called by Python when all the
+		references to the object are gone. """
+		free(<void*>self.data_ptr)
+
 
 cdef extern from "<networkit/Globals.hpp>" namespace "NetworKit":
 
@@ -788,6 +854,17 @@ cdef class Graph:
 		"""
 		self._this.merge(G._this)
 		return self
+	
+	@cython.boundscheck(False) # turn off bounds-checking for entire function
+	@cython.wraparound(False)  # turn off negative index wrapping for entire function
+	def addEdges(self, np.ndarray[node, ndim=2] edge_list):
+		cdef Py_ssize_t num_edges = edge_list.shape[0]
+		cdef node n1
+		cdef node n2
+		for index in range(num_edges):
+			n1 = edge_list[index, 0]
+			n2 = edge_list[index, 1]
+			self._this.addEdge(n1, n2, 1.0)
 
 	def addEdge(self, u, v, w=1.0, addMissing = False):
 		""" Insert an undirected edge between the nodes `u` and `v`. If the graph is weighted you can optionally
@@ -6012,7 +6089,12 @@ cdef class EdmondsKarp:
 
 # Module: properties
 
-cdef extern from "<networkit/components/ConnectedComponents.hpp>":
+cdef extern from "<networkit/components/ConnectedComponents.hpp>" namespace "NetworKit":
+	ctypedef struct cc_result:
+		node* components
+		node n_nodes
+		node* component_sizes
+		node n_components
 
 	cdef cppclass _ConnectedComponents "NetworKit::ConnectedComponents"(_Algorithm):
 		_ConnectedComponents(_Graph G) except +
@@ -6021,6 +6103,8 @@ cdef extern from "<networkit/components/ConnectedComponents.hpp>":
 		_Partition getPartition() except +
 		map[index, count] getComponentSizes() except +
 		vector[vector[node]] getComponents() except +
+		@staticmethod
+		cc_result get_raw_partition(_Graph G) nogil except +
 		@staticmethod
 		_Graph extractLargestConnectedComponent(_Graph G, bool_t) nogil except +
 
@@ -6089,6 +6173,25 @@ cdef class ConnectedComponents(Algorithm):
 			The connected components.
 		"""
 		return (<_ConnectedComponents*>(self._this)).getComponents()
+
+	@staticmethod
+	def get_raw_partition(Graph graph):
+		cdef node* components
+		cdef node* component_sizes
+		cdef np.ndarray np_mapping_array
+		cdef index n_nodes
+		cdef index n_components
+		cc_result = _ConnectedComponents.get_raw_partition(graph._this)
+		components = cc_result.components
+		n_nodes = cc_result.n_nodes
+		component_sizes = cc_result.component_sizes
+		n_components = cc_result.n_components
+		array_wrapper = ArrayWrapper()
+		np_mapping_array = array_wrapper.as_ndarray(n_nodes, <void *>components)
+		array_wrapper = ArrayWrapper()
+		np_component_sizes = array_wrapper.as_ndarray(n_components, <void *>component_sizes)
+		
+		return np_mapping_array, np_component_sizes
 
 	@staticmethod
 	def extractLargestConnectedComponent(Graph graph, bool_t compactGraph = False):

@@ -4,6 +4,7 @@ import shutil
 import sys
 import sysconfig
 import os
+import numpy
 
 cmakeCompiler = None
 buildDirectory = "build/build_python"
@@ -155,6 +156,7 @@ def buildNetworKit(install_prefix, externalCore=False, withTests=False, rpath=No
 	comp_cmd.append("-DNETWORKIT_FLATINSTALL=ON")
 	from sysconfig import get_paths, get_config_var
 	comp_cmd.append("-DNETWORKIT_PYTHON="+get_paths()['include']) #provide python.h files
+	comp_cmd.append("-DNUMPY_INCLUDE_DIR="+numpy.get_include()) #provide numpy header files
 	comp_cmd.append("-DNETWORKIT_PYTHON_SOABI="+get_config_var('SOABI')) #provide lib env specification
 	if externalCore:
 		comp_cmd.append("-DNETWORKIT_BUILD_CORE=OFF")

@@ -7,6 +7,7 @@
 
 #include <set>
 #include <unordered_map>
+#include <algorithm>
 
 #include <networkit/auxiliary/Log.hpp>
 #include <networkit/components/ConnectedComponents.hpp>
@@ -19,6 +20,56 @@ ConnectedComponents::ConnectedComponents(const Graph& G) : G(G) {
     if (G.isDirected()) {
         throw std::runtime_error("Error, connected components of directed graphs cannot be computed, use StronglyConnectedComponents for them.");
     }
+}
+
+cc_result ConnectedComponents::get_raw_partition(const Graph & G) {
+    /*
+     * This is basically a copy from ConnectedComponents::run,
+     * but this function uses a raw c pointer to store the mapping_array
+     * instead of a std::vector. This enables the python interface to take ownership of the data and to avoid a copy.
+     */
+    node n_components = 0;
+    node max_id = G.upperNodeIdBound();
+    auto mapping_array = new node[max_id];
+
+
+    std::fill_n(mapping_array, max_id, none);
+
+
+    std::queue<node> q;
+
+    // perform breadth-first searches
+    G.forNodes([&](node u) {
+        if (mapping_array[u] == none) {
+            index c = n_components;
+
+            q.push(u);
+            mapping_array[u] = c;
+
+            do {
+                node u = q.front();
+                q.pop();
+                // enqueue neighbors, set array
+                G.forNeighborsOf(u, [&](node v) {
+                    if (mapping_array[v] == none) {
+                        q.push(v);
+                        mapping_array[v] = c;
+                    }
+                });
+            } while (!q.empty());
+
+            ++n_components;
+        }
+    });
+
+    auto mapping_sizes = new node[n_components];
+    std::fill_n(mapping_sizes, n_components, 0);
+    for(node n = 0; n < max_id; ++n) {
+        ++mapping_sizes[mapping_array[n]];
+    }
+
+
+    return {mapping_array, max_id, mapping_sizes, n_components};
 }
 
 void ConnectedComponents::run() {

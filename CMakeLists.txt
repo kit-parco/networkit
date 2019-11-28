@@ -213,6 +213,7 @@ if(NETWORKIT_PYTHON)
 	target_include_directories(_NetworKit BEFORE PUBLIC "${PROJECT_SOURCE_DIR}/include")
 	target_include_directories(_NetworKit PRIVATE "${PROJECT_SOURCE_DIR}/extlibs/ttmath/")
 	target_include_directories(_NetworKit PRIVATE "${NETWORKIT_PYTHON}")
+    target_include_directories(_NetworKit PUBLIC "${NUMPY_INCLUDE_DIR}")
 
 	if(NOT NETWORKIT_BUILD_CORE)
 		if(NOT EXTERNAL_NETWORKIT_CORE)

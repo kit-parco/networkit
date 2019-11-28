@@ -1,0 +1,113 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build_mac:
+    runs-on: macOS-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.6, 3.7]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Pull submodules
+      run: git submodule update --init
+    - name: Install system dependencies
+      run: |
+        brew update
+        brew install libomp
+        brew upgrade cmake || True
+        brew reinstall gcc
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install cython wheel twine
+    - name: Build
+      run: |
+        CC=gcc-9 python setup.py build_ext install
+    - name: Smoke test
+      run: |
+        cd /tmp
+        python -c "import networkit; networkit.Graph(5)"
+    - name: Tests
+      run: python -m unittest discover -v networkit/test/
+    - name: Build wheel
+      run: |
+        CC=gcc-9 python setup.py build_ext sdist bdist_wheel
+    - name: Publish
+      if: github.ref == 'Dev'
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        twine upload --repository-url https://pypi.scm.io/simple dist/*.whl
+        
+  build_linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: ['cp35-cp35m', 'cp36-cp36m', 'cp37-cp37m']
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Pull submodules
+      run: git submodule update --init
+
+    - name: Build with manylinux2010
+      run: |
+        docker run \
+          -v$(pwd):/app \
+          -w/app \
+          --rm \
+          -e PYBIN=/opt/python/${{ matrix.python-version }}/bin \
+          quay.io/pypa/manylinux2010_x86_64 \
+          bash -c "
+            set -e -x
+            yum remove cmake -y
+            yum install cmake3 -y
+            ln -s /usr/bin/cmake3 /usr/bin/cmake
+            echo '-->' \$PYBIN
+
+            \$PYBIN/python -m pip install --upgrade pip
+            \$PYBIN/pip install -r requirements.txt
+            \$PYBIN/pip install cython
+            \$PYBIN/cython -3 --cplus -t networkit/_NetworKit.pyx
+            \$PYBIN/python setup.py build_ext
+            \$PYBIN/python setup.py sdist bdist_wheel -p manylinux2010_x86_64"
+
+    - name: Test with manylinux2010
+      run: |
+        docker run \
+          -v$(pwd):/app \
+          -w/app \
+          --rm \
+          -e PYBIN=/opt/python/${{ matrix.python-version }}/bin \
+          quay.io/pypa/manylinux2010_x86_64 \
+          bash -c "
+            set -e -x
+            echo '-->' \$PYBIN
+            \$PYBIN/pip install dist/*${{ matrix.python-version }}-manylinux2010_x86_64.whl
+            \$PYBIN/python -c 'import networkit; networkit.Graph(5)'
+            \$PYBIN/python -m unittest discover -v networkit/test/"
+
+    - name: Publish
+      if: github.ref == 'Dev'
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        python -m pip install --upgrade pip
+        pip install twine
+        twine upload --repository-url https://pypi.scm.io/simple dist/*.whl
