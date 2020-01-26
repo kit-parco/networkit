@@ -8,7 +8,8 @@ from _NetworKit import Partition, Coverage, Modularity, CommunityDetector, PLP, 
 	StablePartitionNodes, IntrapartitionDensity, PartitionHubDominance, CoverHubDominance, PartitionFragmentation, IsolatedInterpartitionExpansion, IsolatedInterpartitionConductance,\
 	EdgeListPartitionReader, GraphClusteringTools, ClusteringGenerator, PartitionIntersection, HubDominance, CoreDecomposition, CutClustering, ParallelPartitionCoarsening, \
 	BinaryPartitionReader, BinaryPartitionWriter, BinaryEdgeListPartitionReader, BinaryEdgeListPartitionWriter, \
-	CoverF1Similarity
+	CoverF1Similarity ,EgoSplitting, LPPotts, LouvainMapEquation, \
+	PLMFactory, PLPFactory, LouvainMapEquationFactory, LPPottsFactory
 
 # R.I.P.: The CNM (Clauset, Newman, Moore) community detection algorithm - it was always a bit slow, but it broke down in the end. Resurrect it from history (<= 3.4.1) if needed for experimental purposes.
 

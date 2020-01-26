@@ -10,6 +10,7 @@
 
 #include <networkit/community/CommunityDetectionAlgorithm.hpp>
 #include <networkit/structures/Partition.hpp>
+#include <networkit/community/ClusteringFunctionFactory.hpp>
 
 namespace NetworKit {
 
@@ -38,18 +39,22 @@ public:
      * Constructor to the label propagation community detection algorithm.
      *
      * @param[in] G input graph
-     * @param[in] theta updateThreshold: number of nodes that have to be changed in each iteration so that a new iteration starts.
+     * @param[in] theta optional; updateThreshold: number of nodes that have to be changed in each iteration so that a new iteration starts.
+     * @param[in] maxIterations optional; the maximum number of iterations
      */
     PLP(const Graph& G, count theta = none, count maxIterations=none);
 
     /**
-     * Constructor to the label propagation community detection algorithm.
+     * Constructor to the label propagation community detection algorithm, starting from a given
+     * clustering.
      *
      * @param[in] G input graph
      * @param[in] baseClustering optional; the algorithm will start from the given clustering.
-     * @param[in] theta updateThreshold: number of nodes that have to be changed in each iteration so that a new iteration starts.
+     * @param[in] theta optional; updateThreshold: number of nodes that have to be changed in each iteration so that a new iteration starts.
+     * @param[in] maxIterations optional; the maximum number of iterations
      */
-    PLP(const Graph& G, const Partition baseClustering, count theta = none);
+    PLP(const Graph& G, const Partition& baseClustering, count theta = none,
+            count maxIterations=none);
 
     /**
      * Run the label propagation clustering algorithm.
@@ -83,6 +88,17 @@ public:
     */
     std::vector<count> getTiming();
 
+};
+
+class PLPFactory : public ClusteringFunctionFactory {
+public:
+    explicit PLPFactory(count theta = none, count maxIterations=none);
+
+    ClusteringFunction getFunction() const override;
+
+private:
+    count theta;
+    count maxIterations;
 };
 
 } /* namespace NetworKit */

@@ -278,5 +278,61 @@ TEST_F(CoverGTest, testInSameSubset) {
     EXPECT_TRUE(c.inSameSubset(1,5));
 }
 
+TEST_F(CoverGTest, testGetSubsets) {
+    count n = 10;
+    Cover c(n);
+    c.setUpperBound(4);
+    c.addToSubset(0, 1);
+    for (index i = 0; i <= 5; ++i) {
+        c.addToSubset(1, i);
+    }
+    std::vector<std::set<index>> controlSets;
+    controlSets.push_back({1});
+    controlSets.push_back({0,1,2,3,4,5});
+    for (index i = 5; i <= 9; ++i) {
+        c.addToSubset(3, i);
+    }
+    controlSets.push_back({5,6,7,8,9});
+
+    auto subsets = c.getSubsets();
+
+    EXPECT_EQ(subsets.size(), controlSets.size());
+    for (const auto& controlSet : controlSets) {
+        bool found = false;
+        for (const auto& set : subsets) {
+            if (set == controlSet)
+                found = true;
+        }
+        EXPECT_TRUE(found);
+    }
+}
+
+TEST_F(CoverGTest, testAddSubset) {
+    count n = 10;
+    Cover c(n);
+    c.setUpperBound(4);
+    c.addToSubset(0, 1);
+    for (index i = 0; i <= 5; ++i) {
+        c.addToSubset(1, i);
+    }
+    std::vector<std::set<index>> controlSets;
+    controlSets.push_back({1});
+    controlSets.push_back({0,1,2,3,4,5});
+    controlSets.push_back({5,6,7,8,9});
+
+    c.addSubset({5,6,7,8,9});
+    auto subsets = c.getSubsets();
+
+    EXPECT_EQ(subsets.size(), controlSets.size());
+    for (const auto& controlSet : controlSets) {
+        bool found = false;
+        for (const auto& set : subsets) {
+            if (set == controlSet)
+                found = true;
+        }
+        EXPECT_TRUE(found);
+    }
+}
+
 
 } /* namespace NetworKit */

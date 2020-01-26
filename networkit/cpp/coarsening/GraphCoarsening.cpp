@@ -13,14 +13,14 @@ GraphCoarsening::GraphCoarsening(const Graph& G) : Algorithm(), G(&G) {
 
 }
 
-Graph GraphCoarsening::getCoarseGraph() const {
+const Graph& GraphCoarsening::getCoarseGraph() const {
     if(!hasRun) {
         throw std::runtime_error("Call run()-method first.");
     }
     return Gcoarsened;
 }
 
-std::vector<node> GraphCoarsening::getFineToCoarseNodeMapping() const {
+const std::vector<node>& GraphCoarsening::getFineToCoarseNodeMapping() const {
     if(!hasRun) {
         throw std::runtime_error("Call run()-method first.");
     }

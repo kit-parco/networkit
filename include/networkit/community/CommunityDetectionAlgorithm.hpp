@@ -33,7 +33,7 @@ public:
      * @param[in] G input graph
      * @param[in] baseClustering optional; the algorithm will start from the given clustering.
      */
-    CommunityDetectionAlgorithm(const Graph& G, const Partition baseClustering);
+    CommunityDetectionAlgorithm(const Graph& G, const Partition& baseClustering);
 
     /** Default destructor */
     virtual ~CommunityDetectionAlgorithm() = default;
@@ -47,7 +47,7 @@ public:
      * Returns the result of the run method or throws an error, if the algorithm hasn't run yet.
      * @return partition of the node set
      */
-    virtual Partition getPartition();
+    virtual const Partition& getPartition() const;
 
     /**
      * @return string representation of algorithm and parameters.
@@ -60,4 +60,5 @@ protected:
 };
 
 } /* namespace NetworKit */
+
 #endif // NETWORKIT_COMMUNITY_COMMUNITY_DETECTION_ALGORITHM_HPP_

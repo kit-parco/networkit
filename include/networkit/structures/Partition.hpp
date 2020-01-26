@@ -192,6 +192,18 @@ public:
      */
     void compact(bool useTurbo = false);
 
+    bool isCompact() const {
+        std::vector<bool> idContained(upperBound(), false);
+        for (index e = 0; e < z; ++e) {
+            idContained[data[e]] = true;
+        }
+        for (index e = 0; e < upperBound(); ++e) {
+            if (!idContained[e]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Check if partition assigns a valid subset to the element @a e.
@@ -264,6 +276,11 @@ public:
      */
     std::vector<index> getVector() const;
 
+    /**
+     * Move the vector representing the partition data structure and leave behind an invalid vector
+     * @return vector containing partition
+     */
+    std::vector<index> moveVector();
 
     /**
      * @return the subsets of the partition as a set of sets.
@@ -309,7 +326,7 @@ public:
      *
      * @param handle Takes parameters <code>(node, index)</code>
      */
-    template<typename Callback> void parallelForEntries(Callback handle) const;
+    template<typename Callback> void parallelForEntries(Callback handle, bool parallel = true) const;
 
 
 private:
@@ -335,8 +352,8 @@ inline void Partition::forEntries(Callback handle) const {
 }
 
 template<typename Callback>
-inline void Partition::parallelForEntries(Callback handle) const {
-    #pragma omp parallel for
+inline void Partition::parallelForEntries(Callback handle, bool par) const {
+    #pragma omp parallel for if (par)
     for (omp_index e = 0; e < static_cast<omp_index>(this->z); e++) {
         handle(e, this->data[e]);
     }

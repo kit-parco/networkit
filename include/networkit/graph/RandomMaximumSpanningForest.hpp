@@ -1,8 +1,9 @@
 #ifndef NETWORKIT_GRAPH_RANDOM_MAXIMUM_SPANNING_FOREST_HPP_
 #define NETWORKIT_GRAPH_RANDOM_MAXIMUM_SPANNING_FOREST_HPP_
 
-#include <networkit/graph/Graph.hpp>
 #include <limits>
+
+#include <networkit/graph/Graph.hpp>
 #include <networkit/structures/UnionFind.hpp>
 #include <networkit/auxiliary/Log.hpp>
 #include <networkit/auxiliary/Random.hpp>
@@ -68,10 +69,9 @@ public:
     /**
      * Gets the calculated maximum-weight spanning forest as graph.
      *
-     * @param move If the graph shall be moved out of the algorithm instance.
      * @return The calculated maximum-weight spanning forest.
      */
-    Graph getMSF(bool move = false);
+    const Graph& getMSF() const;
 
     /**
      * @return false - this algorithm is not parallelized

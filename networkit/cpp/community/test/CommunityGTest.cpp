@@ -7,6 +7,7 @@
 
 #include <gtest/gtest.h>
 
+#include <tlx/unused.hpp>
 #include <networkit/community/PLP.hpp>
 #include <networkit/community/PLM.hpp>
 #include <networkit/community/ParallelAgglomerativeClusterer.hpp>
@@ -14,24 +15,17 @@
 #include <networkit/community/EdgeCut.hpp>
 #include <networkit/community/ClusteringGenerator.hpp>
 #include <networkit/io/METISGraphReader.hpp>
-#include <networkit/overlap/HashingOverlapper.hpp>
-#include <networkit/community/PLM.hpp>
 #include <networkit/community/GraphClusteringTools.hpp>
 #include <networkit/auxiliary/Log.hpp>
 #include <networkit/structures/Partition.hpp>
-#include <networkit/community/Modularity.hpp>
 #include <networkit/community/Coverage.hpp>
-#include <networkit/community/ClusteringGenerator.hpp>
 #include <networkit/community/JaccardMeasure.hpp>
 #include <networkit/community/NodeStructuralRandMeasure.hpp>
 #include <networkit/community/GraphStructuralRandMeasure.hpp>
 #include <networkit/community/NMIDistance.hpp>
-#include <networkit/community/DynamicNMIDistance.hpp>
 #include <networkit/auxiliary/NumericTools.hpp>
-#include <networkit/generators/DynamicBarabasiAlbertGenerator.hpp>
 #include <networkit/community/SampledGraphStructuralRandMeasure.hpp>
 #include <networkit/community/SampledNodeStructuralRandMeasure.hpp>
-#include <networkit/community/GraphClusteringTools.hpp>
 #include <networkit/community/PartitionIntersection.hpp>
 #include <networkit/community/HubDominance.hpp>
 #include <networkit/community/IntrapartitionDensity.hpp>
@@ -39,8 +33,8 @@
 #include <networkit/generators/ClusteredRandomGraphGenerator.hpp>
 #include <networkit/generators/ErdosRenyiGenerator.hpp>
 #include <networkit/community/CoverF1Similarity.hpp>
-
-#include <tlx/unused.hpp>
+#include <networkit/structures/Cover.hpp>
+#include <networkit/community/LPPotts.hpp>
 
 namespace NetworKit {
 
@@ -721,5 +715,34 @@ TEST_F(CommunityGTest, testCoverF1Similarity) {
     EXPECT_DOUBLE_EQ((1.0 + f1) / 3.0, sim.getUnweightedAverage());
     EXPECT_DOUBLE_EQ((1.0 * 10.0 + f1 * 10.0) / 29.0, sim.getWeightedAverage());
 }
+
+
+TEST_F(CommunityGTest, testLPPottsSequential) {
+    count numClusters = 4;
+    ClusteredRandomGraphGenerator gen(100, numClusters, 0.7, 0.03);
+    Graph G = gen.generate();
+
+    LPPotts algo(G);
+    algo.run();
+    Partition partition = algo.getPartition();
+
+    EXPECT_LE(partition.numberOfSubsets(), numClusters + 1);
+    EXPECT_GE(partition.numberOfSubsets(), numClusters);
+}
+
+
+TEST_F(CommunityGTest, testLPPottsParallel) {
+    count numClusters = 4;
+    ClusteredRandomGraphGenerator gen(100, numClusters, 0.7, 0.03);
+    Graph G = gen.generate();
+
+    LPPotts algo(G, 0.3, none, 20, true);
+    algo.run();
+    Partition partition = algo.getPartition();
+
+    EXPECT_LE(partition.numberOfSubsets(), numClusters + 1);
+    EXPECT_GE(partition.numberOfSubsets(), numClusters);
+}
+
 
 } /* namespace NetworKit */

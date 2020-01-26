@@ -170,6 +170,56 @@ TEST_F(CoarseningGTest, testParallelPartitionCoarseningOnRealGraph) {
 
 }
 
+TEST_F(CoarseningGTest, testPartitionCoarseningEdgeWeights) {
+    METISGraphReader reader;
+    Graph G = reader.read("input/celegans_metabolic.graph");
+    G.addEdge(0, 0); // Add a self loop
+
+    ClusteringGenerator clusteringGen;
+    count k = 10; // number of clusters in random clustering
+    Partition random = clusteringGen.makeRandomClustering(G, k);
+
+    ParallelPartitionCoarsening coarsening(G, random, false);
+    coarsening.run();
+    Graph coarseGraph = coarsening.getCoarseGraph();
+
+    ASSERT_EQ(G.totalEdgeWeight(), coarseGraph.totalEdgeWeight());
+    std::vector<node> fineToCoarse = coarsening.getFineToCoarseNodeMapping();
+    for (const auto& cluster : random.getSubsets()) {
+        double degreeSum = 0.0;
+        for (node u : cluster) {
+            degreeSum += G.weightedDegree(u, true);
+        }
+        node coarseNode = fineToCoarse[*cluster.begin()];
+        ASSERT_EQ(degreeSum, coarseGraph.weightedDegree(coarseNode, true));
+    }
+}
+
+TEST_F(CoarseningGTest, testParallelPartitionCoarseningEdgeWeights) {
+    METISGraphReader reader;
+    Graph G = reader.read("input/celegans_metabolic.graph");
+    G.addEdge(0, 0); // Add a self loop
+
+    ClusteringGenerator clusteringGen;
+    count k = 10; // number of clusters in random clustering
+    Partition random = clusteringGen.makeRandomClustering(G, k);
+
+    ParallelPartitionCoarsening coarsening(G, random, false);
+    coarsening.run();
+    Graph coarseGraph = coarsening.getCoarseGraph();
+
+    ASSERT_EQ(G.totalEdgeWeight(), coarseGraph.totalEdgeWeight());
+    std::vector<node> fineToCoarse = coarsening.getFineToCoarseNodeMapping();
+    for (const auto& cluster : random.getSubsets()) {
+        double degreeSum = 0.0;
+        for (node u : cluster) {
+            degreeSum += G.weightedDegree(u, true);
+        }
+        node coarseNode = fineToCoarse[*cluster.begin()];
+        ASSERT_EQ(degreeSum, coarseGraph.weightedDegree(coarseNode, true));
+    }
+}
+
 TEST_F(CoarseningGTest, testParallelPartitionCoarseningOnRealGraphWithGraphBuilder) {
     METISGraphReader reader;
     Graph G = reader.read("input/celegans_metabolic.graph");

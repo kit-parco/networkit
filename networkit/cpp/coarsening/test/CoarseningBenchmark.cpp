@@ -37,21 +37,12 @@ TEST_F(CoarseningBenchmark, benchmarkCoarsening) {
     Aux::Timer timer;
     INFO("parallel coarsening");
     timer.start();
-    ParallelPartitionCoarsening coarsening(G, zeta, false);
+    ParallelPartitionCoarsening coarsening(G, zeta, true);
     coarsening.run();
     timer.stop();
     Graph Gc2 = coarsening.getCoarseGraph();
     INFO("parallel coarsening: ", timer.elapsedTag());
     EXPECT_EQ(k, Gc2.numberOfNodes());
-
-    INFO("parallel coarsening using GraphBuilder");
-    timer.start();
-    ParallelPartitionCoarsening gbCoarsening(G, zeta, true);
-    gbCoarsening.run();
-    timer.stop();
-    Graph Gc3 = gbCoarsening.getCoarseGraph();
-    INFO("parallel coarsening: ", timer.elapsedTag());
-    EXPECT_EQ(k, Gc3.numberOfNodes());
 }
 
 } /* namespace NetworKit */

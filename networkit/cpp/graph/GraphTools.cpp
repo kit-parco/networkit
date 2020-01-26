@@ -210,6 +210,17 @@ Graph copyNodes(const Graph &G) {
     return C;
 }
 
+std::vector<node> nodeSet(const Graph &G) {
+    std::vector<node> nodes;
+    nodes.reserve(G.numberOfNodes());
+    for (node u = 0; u < G.upperNodeIdBound(); ++u) {
+        if (G.hasNode(u)) {
+            nodes.push_back(u);
+        }
+    }
+    return nodes;
+}
+
 Graph subgraphFromNodes(const Graph &G, const std::unordered_set<node> &nodes,
                         bool includeOutNeighbors, bool includeInNeighbors) {
     const auto neighbors = [&] {

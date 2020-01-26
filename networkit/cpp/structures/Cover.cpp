@@ -192,4 +192,27 @@ std::set<index> Cover::getSubsetIds() const {
     return ids;
 }
 
+std::vector<std::set<index>> Cover::getSubsets() const {
+    auto ids = getSubsetIds();
+    auto idMapping = std::vector<index>(upperBound());
+    std::vector<std::set<index>> subsets(ids.size());
+    index newSubsetId = 0;
+    for (index id : ids) {
+        idMapping[id] = newSubsetId++;
+    }
+
+    for (index element = 0; element <= this->z; ++element) {
+        for (index subsetId : data[element]) {
+            subsets[idMapping[subsetId]].insert(element);
+        }
+    }
+    return subsets;
+}
+
+void Cover::addSubset(const std::set<index> &subset) {
+    index id = newSubsetId();
+    for (node e : subset)
+        addToSubset(id, e);
+}
+
 } /* namespace NetworKit */

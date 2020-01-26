@@ -30,12 +30,12 @@ public:
 
     virtual void run() = 0;
 
-    Graph getCoarseGraph() const;
+    const Graph& getCoarseGraph() const;
 
     /**
      * Get mapping from fine to coarse node.
      */
-    std::vector<node> getFineToCoarseNodeMapping() const;
+    const std::vector<node>& getFineToCoarseNodeMapping() const;
 
     /**
      * Get mapping from coarse node to collection of fine nodes.

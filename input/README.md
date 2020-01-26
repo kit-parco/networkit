@@ -8,6 +8,7 @@ This folder contains many smaller graphs. They are used in the testing suite and
 
 | Graph                            | Python format           | Cpp Reader              | Filesize (in byte) | Number of Nodes | Number of Edges | Directed | Weighted | Weblink |
 |----------------------------------|-------------------------|-------------------------|--------------------|-----------------|-----------------|----------|----------|---------|
+| 10_clusters.graph                | Format.METIS            | METISGraphReader        | 3                  | 100             | 556             | FALSE    | FALSE    | n/a     |
 | airfoil1.gi                      | n/a                     | DibapGraphReader        | 149370             | 4253            | 12289           | FALSE    | FALSE    | n/a     |
 | airfoil1.graph                   | Format.METIS            | METISGraphReader        | 116538             | 4253            | 12289           | n/a      | n/a      | n/a     |
 | astro-ph.graph                   | Format.METIS            | METISGraphReader        | 1259548            | 16706           | 121251          | FALSE    | FALSE    | n/a     |
@@ -21,6 +22,7 @@ This folder contains many smaller graphs. They are used in the testing suite and
 | dynamicTest.gexf                 | GEXFReader              | n/a                     | 2677               | n/a             | n/a             | n/a      | n/a      | n/a     |
 | dynamicTest2.gexf                | GEXFReader              | n/a                     | 74818              | n/a             | n/a             | n/a      | n/a      | n/a     |
 | dynamicTest3.gexf                | GEXFReader              | n/a                     | 921                | n/a             | n/a             | n/a      | n/a      | n/a     |
+| erdos_renyi_200_0.05.graph       | Format.METIS            | METISGraphReader        | 7                  | 200             | 1002            | FALSE    | FALSE    | n/a     |
 | example.edgelist                 | Format.EdgeListTabOne   | EdgeListReader          | 85                 | 10              | 10              | FALSE    | FALSE    | n/a     |
 | example.graph                    | Format.METIS            | METISGraphReader        | 16                 | 4               | 2               | FALSE    | FALSE    | n/a     |
 | example2.dgs                     | n/a                     | DGSReader               | 161                | n/a             | n/a             | n/a      | n/a      | n/a     |
@@ -36,6 +38,7 @@ This folder contains many smaller graphs. They are used in the testing suite and
 | johnson8-4-4.edgelist            | Format.EdgeListSpaceOne | EdgeListReader          | 10716              | 70              | 1855            | FALSE    | FALSE    | n/a     |
 | karate.graph                     | Format.METIS            | METISGraphReader        | 450                | 34              | 78              | FALSE    | FALSE    | n/a     |
 | lesmis.graph                     | Format.METIS            | METISGraphReader        | 2630               | 77              | 254             | FALSE    | TRUE     | n/a     |
+| lfr_small.graph                  | Format.METIS            | METISGraphReader        | 4                  | 200             | 595             | FALSE    | FALSE    | n/a     |
 | looptest1.gml                    | Format.GML              | GMLGraphReader          | 676                | 9               | 12              | FALSE    | FALSE    | n/a     |
 | looptest2.gml                    | Format.GML              | GMLGraphReader          | 754                | 9               | 14              | FALSE    | FALSE    | n/a     |
 | MIT8.edgelist                    | Format.EdgeListTabZero  | EdgeListReader          | 2425755            | 6440            | 251252          | FALSE    | FALSE    | n/a     |

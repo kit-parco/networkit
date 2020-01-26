@@ -138,6 +138,13 @@ double density(const Graph &G) noexcept;
 Graph copyNodes(const Graph &G);
 
 /**
+ * Inserts IDs of all nodes contained in @G into a std::vector
+ * @param G The input graph
+ * @return std::vector<node> with all nodes contained in the graph @G
+ */
+std::vector<node> nodeSet(const Graph &G);
+
+/**
  * Returns an induced subgraph of the input graph (including potential edge weights/directions).
  *
  * @param G The input graph.

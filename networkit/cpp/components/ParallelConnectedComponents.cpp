@@ -152,7 +152,7 @@ void ParallelConnectedComponents::runSequential() {
     }
     if (coarsening && numIterations == 8) { // TODO: externalize constant
         // coarsen and make recursive call
-        ParallelPartitionCoarsening con(*G, component, false);
+        ParallelPartitionCoarsening con(*G, component);
         con.run();
         auto Gcon = con.getCoarseGraph();
         ParallelConnectedComponents cc(Gcon);

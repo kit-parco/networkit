@@ -18,7 +18,9 @@ networkit_add_module(community
     IsolatedInterpartitionExpansion.cpp
     JaccardMeasure.cpp
     LPDegreeOrdered.cpp
+    LPPotts.cpp
     LocalCoverEvaluation.cpp
+	LouvainMapEquation.cpp
     LocalPartitionEvaluation.cpp
     Modularity.cpp
     NMIDistance.cpp
@@ -32,10 +34,17 @@ networkit_add_module(community
     SampledGraphStructuralRandMeasure.cpp
     SampledNodeStructuralRandMeasure.cpp
     StablePartitionNodes.cpp
-    )
+    cleanup/MergeCommunities.cpp
+    cleanup/SignificanceCommunityCleanUp.cpp
+    cleanup/SingleCommunityCleanUp.cpp
+    cleanup/StochasticDistributionCalculator.cpp
+	cleanup/SignificanceCalculator.cpp
+	EgoSplitting.cpp
+	)
 
 networkit_module_link_modules(community
     auxiliary base coarsening components flow graph matching structures)
 
 add_subdirectory(test)
+add_subdirectory(cleanup/test)
 
