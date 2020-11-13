@@ -17,7 +17,7 @@ import os
 
 def findClangFormat():
 	"""Tries to find clang-format-XXX variants within the path"""
-	allowed = ["clang-format" + x for x in ["-8", ""]]
+	allowed = ["clang-format" + x for x in ["-8"]]
 	for candidate in allowed:
 		if not shutil.which(candidate) is None:
 			if nkt.isVerbose():
@@ -26,7 +26,7 @@ def findClangFormat():
 
 			return candidate
 
-	raise FileNotFoundError("clang-format binary not found. We searched for:\n " + "\n ".join(allowed))
+	raise "clang-format binary not found. We searched for:\n " + "\n ".join(allowed)
 
 def subscribedToFormat(filename, pattern = "networkit-format"):
 	"""If pattern is present within the file, this file subscribed to auto formatting."""
