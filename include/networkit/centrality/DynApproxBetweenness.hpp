@@ -23,6 +23,7 @@ namespace NetworKit {
 
 // pImpl
 class DynApproxBetweennessImpl;
+class DynApproxBetweennessImplDir;
 /**
  * @ingroup centrality
  * Interface for dynamic approximated betweenness centrality algorithm.
@@ -45,6 +46,18 @@ public:
      */
     DynApproxBetweenness(const Graph &G, double epsilon = 0.01, double delta = 0.1,
                          bool storePredecessors = true, double universalConstant = 1.0);
+    /**
+     * The algorithm approximates the betweenness of all vertices so that the scores are
+     * within an additive error @a epsilon with probability at least (1- @a delta).
+     * The values are normalized by default.
+     *
+     * @param	G			the graph
+     * @param	storePredecessors   keep track of the lists of predecessors?
+     * @param	epsilon		maximum additive error
+     * @param	delta		probability that the values are within the error guarantee
+     */
+    DynApproxBetweenness(const Graph &G, double epsilon = 0.01, double delta = 0.1,
+                         bool storePredecessors = true);
 
     ~DynApproxBetweenness() override;
 
@@ -76,6 +89,7 @@ public:
 
 private:
     std::unique_ptr<DynApproxBetweennessImpl> impl;
+    std::unique_ptr<DynApproxBetweennessImplDir> implDir;
 };
 
 } /* namespace NetworKit */

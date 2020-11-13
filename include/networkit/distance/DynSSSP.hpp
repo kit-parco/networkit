@@ -25,6 +25,7 @@ class DynSSSP: public SSSP, public DynAlgorithm {
 
 friend class DynApproxBetweenness;
 friend class DynApproxBetweennessImpl;
+friend class DynApproxBetweennessImplDir;
 
 public:
     /**
