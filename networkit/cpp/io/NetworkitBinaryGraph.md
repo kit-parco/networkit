@@ -25,7 +25,7 @@ struct Header {
 };
 ```
 - magic: A constant value used to identify the file format version.
-    - The current version is '*nkbg002*' which supports weighted, undirected and directed graphs.
+    - The current version is '*nkbg003*' which supports weighted, undirected and directed graphs.
 - checksum: Currently not used
 - features: Contains the graph information bitwise
     - Bit 0 : directed or undirected
@@ -55,6 +55,7 @@ Base data
 ```
 uint64_t nodeFlags[nodes]: Flags storing information about a node
 uint64_t firstVertex[chunks-1]: The index of the first vertex of each chunk excluding the first chunk
+uint64_t edgeIndex[edges]:
 ```
 Adjacency lists
 -----------------
