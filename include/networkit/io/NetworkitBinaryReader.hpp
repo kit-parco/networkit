@@ -32,6 +32,7 @@ private:
     count chunks;
     bool directed;
     bool weighted;
+    bool indexed;
 };
 } // namespace NetworKit
 

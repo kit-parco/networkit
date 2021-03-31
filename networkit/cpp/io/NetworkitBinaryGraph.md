@@ -23,15 +23,17 @@ struct Header {
 };
 ```
 - magic: A constant value used to identify the file format version.
-    - The current version is '*nkbg002*' which supports weighted, undirected and directed graphs.
+    - The current version is '*nkbg003*' which supports weighted, undirected and directed graphs.
 - checksum: Currently not used
 - features: Contains the graph information bitwise
     - Bit 0 : directed or undirected
-    - Bit 1-2 : the weight format of the graph. Below are the possible formats:
-        - 0 = Weights are unsigned integers
-        - 1 = Weights are signed integers
-        - 2 = Weights are doubles
-        - 3 = Weights are floats
+    - Bit 1-3 : the weight format of the graph. Below are the possible formats:
+		- 0 = Graph is unweighted
+        - 1 = Weights are unsigned integers
+        - 2 = Weights are signed integers
+        - 3 = Weights are doubles
+        - 4 = Weights are floats
+	- Bit 4 = proper edge indexing
 - nodes : The number of nodes the graph has
 - chunks: The number of chunks the nodes have been divided in
 - offsetBaseData: Offset of base data in the file 
@@ -47,6 +49,7 @@ Base data
 ```
 uint64_t nodeFlags[nodes]: Flags storing information about a node
 uint64_t firstVertex[chunks-1]: The index of the first vertex of each chunk excluding the first chunk
+uint64_t edgeIndex[edges]:
 ```
 Adjacency lists
 -----------------

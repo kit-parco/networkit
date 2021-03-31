@@ -32,13 +32,15 @@ class NetworkitBinaryWriter final : public GraphWriter {
 
 public:
     NetworkitBinaryWriter(uint64_t chunks = 32,
-                          NetworkitBinaryWeights weightsType = NetworkitBinaryWeights::autoDetect);
+                          NetworkitBinaryWeights weightsType = NetworkitBinaryWeights::autoDetect,
+                          bool preserveEdgeIndex = false);
 
     void write(const Graph &G, const std::string &path) override;
 
 private:
     count chunks;
     NetworkitBinaryWeights weightsType;
+    bool preserveEdgeIndex;
 };
 
 } // namespace NetworKit

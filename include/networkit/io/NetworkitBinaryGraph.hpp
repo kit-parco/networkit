@@ -27,7 +27,9 @@ struct Header {
     uint64_t offsetAdjLists;
     uint64_t offsetAdjTranspose;
     uint64_t offsetWeightLists;
-    uint64_t offsetWeightTranspose;
+    uint64_t offsetWeightTranspose;	
+    uint64_t offsetAdjIdLists;
+    uint64_t offsetAdjIdTranspose;
 };
 
 enum WEIGHT_FORMAT {
@@ -42,6 +44,8 @@ static constexpr uint8_t DELETED_BIT = 0x1; // bit 0
 static constexpr uint64_t DIR_MASK = 0x1; // bit 0
 static constexpr uint64_t WGHT_MASK = 0xE; //bit 1-3
 static constexpr uint64_t WGHT_SHIFT = 0x1;
+static constexpr uint64_t INDEX_MASK = 0x10; //bit 4
+static constexpr uint64_t INDEX_SHIFT = 0x4;
 
 /**
  * Serializes value into a buffer and returns the number of bytes written.
