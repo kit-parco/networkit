@@ -55,7 +55,6 @@ Base data
 ```
 uint64_t nodeFlags[nodes]: Flags storing information about a node
 uint64_t firstVertex[chunks-1]: The index of the first vertex of each chunk excluding the first chunk
-uint64_t edgeIndex[edges]:
 ```
 Adjacency lists
 -----------------
