@@ -1276,7 +1276,7 @@ public:
      * @param v Endpoint of edge.
      * @param weight Optional edge weight.
      * @param ew Optional edge weight.
-     * @param index Optional node index.
+     * @param index Optional edge index.
      */
     void addPartialEdge(Unsafe, node u, node v, edgeweight ew = defaultEdgeWeight,
                         uint64_t index = 0);
@@ -1289,7 +1289,7 @@ public:
      * @param u Endpoint of edge.
      * @param v Endpoint of edge.
      * @param ew Optional edge weight.
-     * @param index Optional node index.
+     * @param index Optional edge index.
      */
     void addPartialInEdge(Unsafe, node u, node v, edgeweight ew = defaultEdgeWeight,
                           uint64_t index = 0);
@@ -1302,7 +1302,7 @@ public:
      * @param u Endpoint of edge.
      * @param v Endpoint of edge.
      * @param ew Optional edge weight.
-     * @param index Optional node index.
+     * @param index Optional edge index.
      */
     void addPartialOutEdge(Unsafe, node u, node v, edgeweight ew = defaultEdgeWeight,
                            uint64_t index = 0);

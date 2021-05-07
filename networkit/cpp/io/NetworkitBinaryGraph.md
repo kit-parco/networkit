@@ -23,7 +23,7 @@ struct Header {
 };
 ```
 - magic: A constant value used to identify the file format version.
-    - The current version is '*nkbg003*' which supports weighted, undirected and directed graphs.
+    - The current version is '*nkbg002*' which supports weighted, undirected and directed graphs.
 - checksum: Currently not used
 - features: Contains the graph information bitwise
     - Bit 0 : directed or undirected
