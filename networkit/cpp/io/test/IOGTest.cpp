@@ -840,6 +840,30 @@ TEST_F(IOGTest, testNetworkitBinaryTiny01) {
     });
 }
 
+TEST_F(IOGTest, testNetworkitBinaryTiny01Indexed) {
+    METISGraphReader reader2;
+    Graph G = reader2.read("input/tiny_01.graph");
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
+
+    G.indexEdges();
+    writer.write(G, "output/binary_tiny01");
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binary_tiny01");
+    EXPECT_EQ(G2.isDirected(), false);
+    EXPECT_EQ(G2.isWeighted(), false);
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+            ASSERT_EQ(G2.edgeId(u,v), G.edgeId(u,v));
+        });
+    });
+}
+
 TEST_F(IOGTest, testNetworkitBinaryKonect) {
     KONECTGraphReader reader2;
     Graph G = reader2.read("input/foodweb-baydry.konect");
@@ -858,6 +882,29 @@ TEST_F(IOGTest, testNetworkitBinaryKonect) {
         G.forEdgesOf(u, [&](node v) {
             ASSERT_TRUE(G2.hasEdge(u,v));
             ASSERT_EQ(G.weight(u,v), G2.weight(u,v));
+        });
+    });
+}
+
+TEST_F(IOGTest, testNetworkitBinaryKonectIndexed) {
+    KONECTGraphReader reader2;
+    Graph G = reader2.read("input/foodweb-baydry.konect");
+    G.indexEdges();
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
+    writer.write(G, "output/binary_konect");
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binary_konect");
+    EXPECT_EQ(G2.isDirected(), true);
+    EXPECT_EQ(G2.isWeighted(), true);
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+            ASSERT_EQ(G.weight(u,v), G2.weight(u,v));
+            ASSERT_EQ(G.edgeId(u,v), G2.edgeId(u,v));
         });
     });
 }
@@ -883,10 +930,54 @@ TEST_F(IOGTest, testNetworkitBinaryJazz) {
     });
 }
 
+TEST_F(IOGTest, testNetworkitBinaryJazzIndexed) {
+    METISGraphReader reader2;
+    Graph G = reader2.read("input/jazz.graph");
+    G.indexEdges();
+
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
+    writer.write(G, "output/binary_jazz");
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binary_jazz");
+    EXPECT_EQ(G2.isDirected(), false);
+    EXPECT_EQ(G2.isWeighted(), false);
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+        });
+    });
+}
+
 TEST_F(IOGTest, testNetworkitBinaryWiki) {
     SNAPGraphReader reader2(true);
     Graph G = reader2.read("input/wiki-Vote.txt");
     NetworkitBinaryWriter writer;
+
+    writer.write(G, "output/binary_wiki");
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binary_wiki");
+    EXPECT_EQ(G2.isDirected(), true);
+    EXPECT_EQ(G2.isWeighted(), false);
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+        });
+    });
+}
+
+TEST_F(IOGTest, testNetworkitBinaryWikiIndexed) {
+    SNAPGraphReader reader2(true);
+    Graph G = reader2.read("input/wiki-Vote.txt");
+    G.indexEdges();
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
 
     writer.write(G, "output/binary_wiki");
     ASSERT_TRUE(!G.isEmpty());
@@ -927,6 +1018,31 @@ TEST_F(IOGTest, testNetworkitBinarySignedWeights) {
     });
 }
 
+TEST_F(IOGTest, testNetworkitBinarySignedWeightsIndexed) {
+
+    Graph G(10, true, false);
+    G.indexEdges();
+    int64_t weight = -1;
+    for(count n = 0; n < G.numberOfNodes(); n++) {
+        if(n != G.numberOfNodes()-1)
+            G.addEdge(n, n+1, weight++);
+    }
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
+    writer.write(G, "output/binarySigned");
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binarySigned");
+    EXPECT_EQ(G2.isDirected(), false);
+    EXPECT_EQ(G2.isWeighted(), true);
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+            ASSERT_EQ(G.weight(u,v), G2.weight(u,v));
+            ASSERT_EQ(G.edgeId(u,v), G2.edgeId(u,v));
+        });
+    });
+}
+
 TEST_F(IOGTest, testNetworkitBinaryFloatWeights) {
 
     Graph G(10, true, false);
@@ -936,6 +1052,30 @@ TEST_F(IOGTest, testNetworkitBinaryFloatWeights) {
             G.addEdge(n, n+1, weight++);
     }
     NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect);
+    writer.write(G, "output/binaryFloats");
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.read("output/binaryFloats");
+    EXPECT_EQ(G2.isDirected(), false);
+    EXPECT_EQ(G2.isWeighted(), true);
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+            ASSERT_EQ(G.weight(u,v), G2.weight(u,v));
+        });
+    });
+}
+
+TEST_F(IOGTest, testNetworkitBinaryFloatWeightsIndexed) {
+
+    Graph G(10, true, false);
+    G.indexEdges();
+    float weight = 987.654f;
+    for(count n = 0; n < G.numberOfNodes(); n++) {
+        if(n != G.numberOfNodes()-1)
+            G.addEdge(n, n+1, weight++);
+    }
+    NetworkitBinaryWriter writer(32, NetworkitBinaryWeights::autoDetect, true);
     writer.write(G, "output/binaryFloats");
 
     NetworkitBinaryReader reader;
