@@ -20,6 +20,8 @@ struct Header {
     uint64_t offsetTranspose;
     uint64_t offsetWeightLists;
     uint64_t offsetWeightTranspose;
+    uint64_t offsetAdjIdLists;
+    uint64_t offsetAdjIdTranspose;
 };
 ```
 - magic: A constant value used to identify the file format version.
@@ -41,6 +43,10 @@ struct Header {
 - offsetTranspose: Offset of the transposed adjaceny lists in the file
 - offsetWeightLists: Offset of the adjacency weights in the file
 - offsetWeightTranspose: Offset of the transposed adjacency weights in the file
+- offsetWeightLists: Offset of the adjacency weights in the file
+- offsetWeightTranspose: Offset of the transposed adjacency weights in the file
+- offsetAdjIdLists: Offset of the adjacency edge ids in the file
+- offsetAdjIdTranspose: Offset of the transposed adjacency edge ids in the file
 
 All offsets are relative to the beginning of the section.
 
@@ -49,7 +55,6 @@ Base data
 ```
 uint64_t nodeFlags[nodes]: Flags storing information about a node
 uint64_t firstVertex[chunks-1]: The index of the first vertex of each chunk excluding the first chunk
-uint64_t edgeIndex[edges]:
 ```
 Adjacency lists
 -----------------
@@ -85,4 +90,16 @@ Depending on the type of weights:
  - unsigned/signed weights: varint data [...]: Varint encoded weight lists
  - double weights: double data [...]: Weight lists as doubles
  - float weights: float data [...]: Weight lists as floats
+```
+Index lists
+--------------------
+```
+uint64_t offset[chunks-1]: Offset of the file where the indices are
+varint data [...]: Varint encoded weight lists
+```
+Index transpose
+--------------------
+```
+uint64_t offset[chunks-1]: Offset of the file where the transposed indices are:
+varint data [...]: Varint encoded index lists
 ```
