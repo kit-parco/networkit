@@ -111,6 +111,7 @@ Graph NetworkitBinaryReader::readData(const T &source) {
     const char *transpIdIt = getIterator(source) + header.offsetAdjIdTranspose;
 
 
+
     uint64_t adjListSize;
     memcpy(&adjListSize, adjIt + (chunks -1) * sizeof(uint64_t), sizeof(uint64_t));
     uint64_t transposeListSize;
