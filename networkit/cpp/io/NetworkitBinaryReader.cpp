@@ -102,6 +102,7 @@ Graph NetworkitBinaryReader::read(const std::string& path) {
     const char *adjIdIt = mmfile.cbegin() + header.offsetAdjIdLists;
     const char *transpIdIt = mmfile.cbegin() + header.offsetAdjIdTranspose;
 
+
     uint64_t adjListSize;
     memcpy(&adjListSize, adjIt + (chunks -1) * sizeof(uint64_t), sizeof(uint64_t));
     uint64_t transposeListSize;
@@ -127,8 +128,10 @@ Graph NetworkitBinaryReader::read(const std::string& path) {
             memcpy(&transpOff, transpIt + (c-1)* sizeof(uint64_t), sizeof(uint64_t));
             memcpy(&wghtOff, adjWghtIt + (c-1) * sizeof(uint64_t), sizeof(uint64_t));
             memcpy(&transWghtOff, transpWghtIt + (c-1) * sizeof(uint64_t), sizeof(uint64_t));
+            if(indexed){
             memcpy(&indexOff, adjIdIt + (c-1) * sizeof(uint64_t), sizeof(uint64_t));
             memcpy(&transIndexOff, transpIdIt + (c-1) * sizeof(uint64_t), sizeof(uint64_t));
+            }
         }
         off += (chunks - 1) * sizeof(uint64_t);
         transpOff += (chunks - 1) * sizeof(uint64_t);
