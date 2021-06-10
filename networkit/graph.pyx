@@ -6,6 +6,7 @@ from .base import Algorithm
 from .helpers import stdstring, pystring
 from .traversal import Traversal
 from .graphio import readGraph, writeGraph, Format
+from fs.memoryfs import MemoryFS
 import os
 
 cdef class Graph:
