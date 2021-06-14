@@ -36,6 +36,7 @@ public:
                           bool preserveEdgeIndex = false);
 
     void write(const Graph &G, const std::string &path) override;
+    std::string writeData(const Graph &G);
 
 private:
     count chunks;

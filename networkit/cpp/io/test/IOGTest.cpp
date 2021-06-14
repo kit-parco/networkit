@@ -840,6 +840,27 @@ TEST_F(IOGTest, testNetworkitBinaryTiny01) {
     });
 }
 
+TEST_F(IOGTest, testNetworkitBinaryTiny01InMemory) {
+    METISGraphReader reader2;
+    Graph G = reader2.read("input/tiny_01.graph");
+    NetworkitBinaryWriter writer;
+
+    std::string data = writer.writeData(G);
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.readData(data);
+    EXPECT_EQ(G2.isDirected(), false);
+    EXPECT_EQ(G2.isWeighted(), false);
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+        });
+    });
+}
+
 TEST_F(IOGTest, testNetworkitBinaryTiny01Indexed) {
     METISGraphReader reader2;
     Graph G = reader2.read("input/tiny_01.graph");
@@ -885,6 +906,29 @@ TEST_F(IOGTest, testNetworkitBinaryKonect) {
         });
     });
 }
+
+TEST_F(IOGTest, testNetworkitBinaryKonectInMemory) {
+    KONECTGraphReader reader2;
+    Graph G = reader2.read("input/foodweb-baydry.konect");
+    NetworkitBinaryWriter writer;
+
+    std::string data = writer.writeData(G);
+    ASSERT_TRUE(!G.isEmpty());
+
+    NetworkitBinaryReader reader;
+    Graph G2 = reader.readData(data);
+    EXPECT_EQ(G2.isDirected(), true);
+    EXPECT_EQ(G2.isWeighted(), true);
+    ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
+    ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
+    G.forNodes([&](node u){
+        G.forEdgesOf(u, [&](node v) {
+            ASSERT_TRUE(G2.hasEdge(u,v));
+            ASSERT_EQ(G.weight(u,v), G2.weight(u,v));
+        });
+    });
+}
+
 
 TEST_F(IOGTest, testNetworkitBinaryKonectIndexed) {
     KONECTGraphReader reader2;

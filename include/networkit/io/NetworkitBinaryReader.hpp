@@ -26,6 +26,7 @@ public:
     NetworkitBinaryReader(){};
 
     Graph read(const std::string &path) override;
+    Graph readData(const std::string &data);
 
 private:
     count nodes;
