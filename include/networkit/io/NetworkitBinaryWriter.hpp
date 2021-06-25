@@ -36,12 +36,15 @@ public:
                           bool preserveEdgeIndex = false);
 
     void write(const Graph &G, const std::string &path) override;
-    std::string writeData(const Graph &G);
+    std::string writeState(const Graph &G);
 
 private:
     count chunks;
     NetworkitBinaryWeights weightsType;
     bool preserveEdgeIndex;
+
+    template <class T>
+    void writeData(T &outStream, const Graph &G);
 };
 
 } // namespace NetworKit

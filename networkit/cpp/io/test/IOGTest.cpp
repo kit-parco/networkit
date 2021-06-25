@@ -10,6 +10,7 @@
 #include <array>
 #include <cassert>
 #include <chrono>
+#include <cstring>
 #include <iostream>
 #include <fstream>
 #include <limits>
@@ -845,11 +846,11 @@ TEST_F(IOGTest, testNetworkitBinaryTiny01InMemory) {
     Graph G = reader2.read("input/tiny_01.graph");
     NetworkitBinaryWriter writer;
 
-    std::string data = writer.writeData(G);
+    std::string data = writer.writeState(G);
     ASSERT_TRUE(!G.isEmpty());
 
     NetworkitBinaryReader reader;
-    Graph G2 = reader.readData(data);
+    Graph G2 = reader.readState(data);
     EXPECT_EQ(G2.isDirected(), false);
     EXPECT_EQ(G2.isWeighted(), false);
     ASSERT_EQ(G2.numberOfNodes(), G.numberOfNodes());
@@ -912,11 +913,11 @@ TEST_F(IOGTest, testNetworkitBinaryKonectInMemory) {
     Graph G = reader2.read("input/foodweb-baydry.konect");
     NetworkitBinaryWriter writer;
 
-    std::string data = writer.writeData(G);
+    std::string data = writer.writeState(G);
     ASSERT_TRUE(!G.isEmpty());
 
     NetworkitBinaryReader reader;
-    Graph G2 = reader.readData(data);
+    Graph G2 = reader.readState(data);
     EXPECT_EQ(G2.isDirected(), true);
     EXPECT_EQ(G2.isWeighted(), true);
     ASSERT_EQ(G2.numberOfEdges(), G.numberOfEdges());
