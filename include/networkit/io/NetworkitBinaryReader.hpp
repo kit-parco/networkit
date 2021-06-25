@@ -10,7 +10,10 @@
 #define NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 
 #include <cstring>
+<<<<<<< HEAD
 #include <string>
+=======
+>>>>>>> 1d3bd11ac... Templating of the binary read/write functions
 #include <networkit/graph/Graph.hpp>
 #include <networkit/io/GraphReader.hpp>
 #include <networkit/io/MemoryMappedFile.hpp>
@@ -52,7 +55,24 @@ private:
     bool indexed;
 
     template <class T>
+<<<<<<< HEAD
     Graph readData(const T &source);
+=======
+    Graph readData(T &source);
+
+    template <class T>
+    const char *getIterator(T &source);
+
+    template <>
+    const char *getIterator(MemoryMappedFile &source) {
+        return source.cbegin();
+    };
+
+    template <>
+    const char *getIterator(std::string &source) {
+        return source.data();
+    };
+>>>>>>> 1d3bd11ac... Templating of the binary read/write functions
 };
 } // namespace NetworKit
 

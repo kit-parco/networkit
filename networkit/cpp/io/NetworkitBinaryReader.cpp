@@ -274,12 +274,16 @@ Graph NetworkitBinaryReader::readData(const T &source) {
     return G;
 }
 
-Graph NetworkitBinaryReader::readData(const std::string& data) {
+Graph NetworkitBinaryReader::readState(const std::string& data) {
+    return readData(data);
+}
+
+template<class T>
+Graph NetworkitBinaryReader::readData(T &source) {
     nkbg::Header header;
     nkbg::WEIGHT_FORMAT weightFormat;
-
-    const char* it = data.data();
-
+    
+    const char* it = getIterator(source);
     auto readHeader = [&] () {
         memcpy(&header.magic, it, sizeof(uint64_t));
         it += sizeof(uint64_t);
@@ -332,7 +336,7 @@ Graph NetworkitBinaryReader::readData(const std::string& data) {
     if(indexed) G.indexEdges();
     // Read base data.
     std::vector<uint8_t> nodeFlags;
-    const char *baseIt = data.data() + header.offsetBaseData;
+    const char *baseIt = getIterator(source) + header.offsetBaseData;
     for(uint64_t i = 0; i < nodes; i++) {
         uint8_t flag;
         memcpy(&flag, baseIt, sizeof(uint8_t));
@@ -352,12 +356,12 @@ Graph NetworkitBinaryReader::readData(const std::string& data) {
     }
     firstVert.push_back(nodes);
     // Read adjacency lists.
-    const char *adjIt = data.data() + header.offsetAdjLists;
-    const char *transpIt = data.data() + header.offsetAdjTranspose;
-    const char *adjWghtIt = data.data() + header.offsetWeightLists;
-    const char *transpWghtIt = data.data() + header.offsetWeightTranspose;
-    const char *adjIdIt = data.data() + header.offsetAdjIdLists;
-    const char *transpIdIt = data.data() + header.offsetAdjIdTranspose;
+    const char *adjIt = getIterator(source) + header.offsetAdjLists;
+    const char *transpIt = getIterator(source) + header.offsetAdjTranspose;
+    const char *adjWghtIt = getIterator(source) + header.offsetWeightLists;
+    const char *transpWghtIt = getIterator(source) + header.offsetWeightTranspose;
+    const char *adjIdIt = getIterator(source) + header.offsetAdjIdLists;
+    const char *transpIdIt = getIterator(source) + header.offsetAdjIdTranspose;
 
 
     uint64_t adjListSize;
@@ -521,5 +525,4 @@ Graph NetworkitBinaryReader::readData(const std::string& data) {
     G.setNumberOfSelfLoops(unsafe, selfLoops);
     return G;
 }
-
 } /* namespace */
