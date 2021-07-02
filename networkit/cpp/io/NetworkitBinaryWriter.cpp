@@ -4,6 +4,7 @@
  * @author Charmaine Ndolo <charmaine.ndolo@hu-berlin.de>
  */
 
+#include <string>
 #include <cstring>
 #include <fstream>
 

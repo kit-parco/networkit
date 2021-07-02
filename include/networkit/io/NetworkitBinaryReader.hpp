@@ -9,6 +9,7 @@
 #ifndef NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 #define NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 
+#include <string>
 #include <cstring>
 #include <networkit/graph/Graph.hpp>
 #include <networkit/io/GraphReader.hpp>
@@ -24,11 +25,26 @@ namespace NetworKit {
 
 class NetworkitBinaryReader final : public GraphReader {
 
+
+
 public:
     NetworkitBinaryReader(){};
 
     Graph read(const std::string &path) override;
     Graph readState(const std::string &data);
+	
+	template <class T>
+    const char *getIterator(const T &source);
+
+    template <>
+    const char *getIterator(const MemoryMappedFile &source) {
+        return source.cbegin();
+    };
+
+    template <>
+    const char *getIterator(const std::string &source) {
+        return source.data();
+    };
 
 private:
     count nodes;
@@ -38,20 +54,9 @@ private:
     bool indexed;
 
     template <class T>
-    Graph readData(T &source);
+    Graph readData(const T &source);
 
-    template <class T>
-    const char *getIterator(T &source);
 
-    template <>
-    const char *getIterator(MemoryMappedFile &source) {
-        return source.cbegin();
-    };
-
-    template <>
-    const char *getIterator(std::string &source) {
-        return source.data();
-    };
 };
 } // namespace NetworKit
 

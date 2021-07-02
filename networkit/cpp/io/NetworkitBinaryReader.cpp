@@ -26,7 +26,7 @@ Graph NetworkitBinaryReader::readState(const std::string& data) {
 }
 
 template<class T>
-Graph NetworkitBinaryReader::readData(T &source) {
+Graph NetworkitBinaryReader::readData(const T &source) {
     nkbg::Header header;
     nkbg::WEIGHT_FORMAT weightFormat;
     
