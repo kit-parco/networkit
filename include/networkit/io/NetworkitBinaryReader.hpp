@@ -9,11 +9,8 @@
 #ifndef NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 #define NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 
-#include <cstring>
-<<<<<<< HEAD
 #include <string>
-=======
->>>>>>> 1d3bd11ac... Templating of the binary read/write functions
+#include <cstring>
 #include <networkit/graph/Graph.hpp>
 #include <networkit/io/GraphReader.hpp>
 #include <networkit/io/MemoryMappedFile.hpp>
@@ -28,11 +25,26 @@ namespace NetworKit {
 
 class NetworkitBinaryReader final : public GraphReader {
 
+
+
 public:
     NetworkitBinaryReader(){};
 
     Graph read(const std::string &path) override;
     Graph readState(const std::string &data);
+	
+	template <class T>
+    const char *getIterator(const T &source);
+
+    template <>
+    const char *getIterator(const MemoryMappedFile &source) {
+        return source.cbegin();
+    };
+
+    template <>
+    const char *getIterator(const std::string &source) {
+        return source.data();
+    };
 
     template <class T>
     const char *getIterator(const T &source);
@@ -56,13 +68,16 @@ private:
 
     template <class T>
 <<<<<<< HEAD
+<<<<<<< HEAD
     Graph readData(const T &source);
 =======
     Graph readData(T &source);
+=======
+    Graph readData(const T &source);
+>>>>>>> 8e55b4b61... Fixes liker error with template functions
 
-    template <class T>
-    const char *getIterator(T &source);
 
+<<<<<<< HEAD
     template <>
     const char *getIterator(MemoryMappedFile &source) {
         return source.cbegin();
@@ -73,6 +88,8 @@ private:
         return source.data();
     };
 >>>>>>> 1d3bd11ac... Templating of the binary read/write functions
+=======
+>>>>>>> 8e55b4b61... Fixes liker error with template functions
 };
 } // namespace NetworKit
 
