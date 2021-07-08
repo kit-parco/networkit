@@ -5,8 +5,7 @@ from cython.operator import dereference, preincrement
 from .base import Algorithm
 from .helpers import stdstring, pystring
 from .traversal import Traversal
-from .graphio import readGraph, writeGraph, Format
-from fs.memoryfs import MemoryFS
+from .graphio import NetworkBinaryReader, NetworkBinaryWriter, Format
 import os
 
 cdef class Graph:
@@ -55,37 +54,10 @@ cdef class Graph:
 		return "NetworKit.Graph(n={0}, m={1})".format(self.numberOfNodes(), self.numberOfEdges())
 	
 	def __getstate__(self):
-		if not os.path.isdir('./tmp/'):
-			os.makedirs('./tmp')
-		i = 0
-		filename = "./tmp/tmpGraph" + str(i)
-		while os.path.exists(filename):
-			i = i+1
-			filename = "./tmp/tmpGraph" + str(i)
-		writeGraph(self, filename, Format.NetworkitBinary, chunks = 32, weightsType = 5, preserveEdgeIndex = True)
-		
-		file = open(filename, mode='rb')
-		graph_bytes = file.read()
-		file.close()
-		os.remove(filename)
-		
-		return graph_bytes
+		return NetworkBinaryWriter(Format.NetworkitBinary, chunks = 32, weightsType = 5, preserveEdgeIndex = True).writeState(self)
 	
 	def __setstate__(self, state):
-		if not os.path.isdir('./tmp/'):
-			os.makedirs('./tmp')
-		i = 0
-		filename = "./tmp/tmpGraph" + str(i)
-		while os.path.exists(filename):
-			i = i+1
-			filename = "./tmp/tmpGraph" + str(i)
-		
-		file = open(filename, mode='wb')
-		file.write(state)
-		file.close()
-		os.remove(filename)
-	
-		self.this = readGraph(state, Format.NetworkitBinary)
+		self.this = NetworkBinaryReader().readState(state)
 
 	def indexEdges(self, bool_t force = False):
 		"""
