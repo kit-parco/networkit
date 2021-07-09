@@ -2,6 +2,7 @@
 import unittest
 import random
 import networkit as nk
+import pickle
 
 class TestGraph(unittest.TestCase):
 	def getSmallGraph(self, weighted=False, directed=False):
@@ -252,6 +253,11 @@ class TestGraph(unittest.TestCase):
 
 		self.assertEqual(G.numberOfNodes(), 3)
 		self.assertEqual(G.numberOfEdges(), 2)
+
+	def testGraphPickling(self):
+		G = nk.Graph(2)
+		G.addEdge(0,1)
+		pickle.dumps(G)
 
 if __name__ == "__main__":
 	unittest.main()

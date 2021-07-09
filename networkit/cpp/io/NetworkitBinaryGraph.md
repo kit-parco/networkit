@@ -20,6 +20,8 @@ struct Header {
     uint64_t offsetTranspose;
     uint64_t offsetWeightLists;
     uint64_t offsetWeightTranspose;
+    uint64_t offsetAdjIdLists;
+    uint64_t offsetAdjIdTranspose;
 };
 ```
 - magic: A constant value used to identify the file format version.
@@ -27,11 +29,13 @@ struct Header {
 - checksum: Currently not used
 - features: Contains the graph information bitwise
     - Bit 0 : directed or undirected
-    - Bit 1-2 : the weight format of the graph. Below are the possible formats:
-        - 0 = Weights are unsigned integers
-        - 1 = Weights are signed integers
-        - 2 = Weights are doubles
-        - 3 = Weights are floats
+    - Bit 1-3 : the weight format of the graph. Below are the possible formats:
+		- 0 = Graph is unweighted
+        - 1 = Weights are unsigned integers
+        - 2 = Weights are signed integers
+        - 3 = Weights are doubles
+        - 4 = Weights are floats
+	- Bit 4 = proper edge indexing
 - nodes : The number of nodes the graph has
 - chunks: The number of chunks the nodes have been divided in
 - offsetBaseData: Offset of base data in the file 
@@ -39,6 +43,10 @@ struct Header {
 - offsetTranspose: Offset of the transposed adjaceny lists in the file
 - offsetWeightLists: Offset of the adjacency weights in the file
 - offsetWeightTranspose: Offset of the transposed adjacency weights in the file
+- offsetWeightLists: Offset of the adjacency weights in the file
+- offsetWeightTranspose: Offset of the transposed adjacency weights in the file
+- offsetAdjIdLists: Offset of the adjacency edge ids in the file
+- offsetAdjIdTranspose: Offset of the transposed adjacency edge ids in the file
 
 All offsets are relative to the beginning of the section.
 
@@ -82,4 +90,16 @@ Depending on the type of weights:
  - unsigned/signed weights: varint data [...]: Varint encoded weight lists
  - double weights: double data [...]: Weight lists as doubles
  - float weights: float data [...]: Weight lists as floats
+```
+Index lists
+--------------------
+```
+uint64_t offset[chunks-1]: Offset of the file where the indices are
+varint data [...]: Varint encoded weight lists
+```
+Index transpose
+--------------------
+```
+uint64_t offset[chunks-1]: Offset of the file where the transposed indices are:
+varint data [...]: Varint encoded index lists
 ```
