@@ -9,8 +9,8 @@
 #ifndef NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 #define NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 
-#include <string>
 #include <cstring>
+#include <string>
 #include <networkit/graph/Graph.hpp>
 #include <networkit/io/GraphReader.hpp>
 #include <networkit/io/MemoryMappedFile.hpp>
@@ -25,15 +25,13 @@ namespace NetworKit {
 
 class NetworkitBinaryReader final : public GraphReader {
 
-
-
 public:
     NetworkitBinaryReader(){};
 
     Graph read(const std::string &path) override;
     Graph readState(const std::string &data);
-	
-	template <class T>
+
+    template <class T>
     const char *getIterator(const T &source);
 
     template <>
