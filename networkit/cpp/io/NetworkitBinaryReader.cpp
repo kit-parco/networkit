@@ -13,6 +13,19 @@
 #include <networkit/io/NetworkitBinaryGraph.hpp>
 #include <networkit/io/MemoryMappedFile.hpp>
 
+template <class T>
+const char *getIterator(const T &source);
+
+template <>
+const char *getIterator(const NetworKit::MemoryMappedFile &source) {
+    return source.cbegin();
+}
+
+template <>
+const char *getIterator(const std::string &source) {
+    return source.data();
+}
+
 namespace NetworKit {
 
 Graph NetworkitBinaryReader::read(const std::string& path) {

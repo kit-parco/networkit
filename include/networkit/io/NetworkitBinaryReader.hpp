@@ -31,19 +31,6 @@ public:
     Graph read(const std::string &path) override;
     Graph readState(const std::string &data);
 
-    template <class T>
-    const char *getIterator(const T &source);
-
-    template <>
-    const char *getIterator(const MemoryMappedFile &source) {
-        return source.cbegin();
-    };
-
-    template <>
-    const char *getIterator(const std::string &source) {
-        return source.data();
-    };
-
 private:
     count nodes;
     count chunks;
