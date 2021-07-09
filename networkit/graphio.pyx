@@ -141,7 +141,7 @@ cdef class METISGraphReader(GraphReader):
 cdef extern from "<networkit/io/NetworkitBinaryReader.hpp>":
 	cdef cppclass _NetworkitBinaryReader "NetworKit::NetworkitBinaryReader" (_GraphReader):
 		_NetworkitBinaryReader() except +
-		_Graph _readState(string state) except +
+		_Graph readState(string state) except +
 
 cdef class NetworkitBinaryReader(GraphReader):
 	"""
@@ -152,19 +152,19 @@ cdef class NetworkitBinaryReader(GraphReader):
 		self._this = new _NetworkitBinaryReader()
 	
 	def readState(self, state):
-		return (<_NetworkitBinaryReader*>(self._this))._readState(state)
+		return Graph().setThis((<_NetworkitBinaryReader*>(self._this)).readState(state))
 
 cdef extern from "<networkit/io/NetworkitBinaryWriter.hpp>":
 	cdef cppclass _NetworkitBinaryWriter "NetworKit::NetworkitBinaryWriter" (_GraphWriter):
 		_NetworkitBinaryWriter() except +
-		string _writeState(_Graph G) except +
+		string writeState(_Graph G) except +
 
 cdef class NetworkitBinaryWriter(GraphWriter):
 	def __cinit__(self):
 		self._this = new _NetworkitBinaryWriter()
 	
 	def writeState(self, Graph G not None):
-		return (<_NetworkitBinaryWriter*>(self._this))._writeState(G)
+		return (<_NetworkitBinaryWriter*>(self._this)).writeState(G._this)
 
 cdef extern from "<networkit/io/GraphToolBinaryReader.hpp>":
 

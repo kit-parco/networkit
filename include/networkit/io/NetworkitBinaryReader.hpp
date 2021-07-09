@@ -46,19 +46,6 @@ public:
         return source.data();
     };
 
-    template <class T>
-    const char *getIterator(const T &source);
-
-    template <>
-    const char *getIterator(const MemoryMappedFile &source) {
-        return source.cbegin();
-    };
-
-    template <>
-    const char *getIterator(const std::string &source) {
-        return source.data();
-    };
-
 private:
     count nodes;
     count chunks;
@@ -67,29 +54,7 @@ private:
     bool indexed;
 
     template <class T>
-<<<<<<< HEAD
-<<<<<<< HEAD
     Graph readData(const T &source);
-=======
-    Graph readData(T &source);
-=======
-    Graph readData(const T &source);
->>>>>>> 8e55b4b61... Fixes liker error with template functions
-
-
-<<<<<<< HEAD
-    template <>
-    const char *getIterator(MemoryMappedFile &source) {
-        return source.cbegin();
-    };
-
-    template <>
-    const char *getIterator(std::string &source) {
-        return source.data();
-    };
->>>>>>> 1d3bd11ac... Templating of the binary read/write functions
-=======
->>>>>>> 8e55b4b61... Fixes liker error with template functions
 };
 } // namespace NetworKit
 

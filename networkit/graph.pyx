@@ -5,7 +5,7 @@ from cython.operator import dereference, preincrement
 from .base import Algorithm
 from .helpers import stdstring, pystring
 from .traversal import Traversal
-from .graphio import NetworkBinaryReader, NetworkBinaryWriter, Format
+from . import graphio
 import os
 
 cdef class Graph:
@@ -54,10 +54,10 @@ cdef class Graph:
 		return "NetworKit.Graph(n={0}, m={1})".format(self.numberOfNodes(), self.numberOfEdges())
 	
 	def __getstate__(self):
-		return NetworkBinaryWriter(Format.NetworkitBinary, chunks = 32, weightsType = 5, preserveEdgeIndex = True).writeState(self)
+		return graphio.NetworkitBinaryWriter(graphio.Format.NetworkitBinary, chunks = 32, weightsType = 5, preserveEdgeIndex = True).writeState(self)
 	
 	def __setstate__(self, state):
-		self.this = NetworkBinaryReader().readState(state)
+		self.this = graphio.NetworkitBinaryWriter().readState(state)
 
 	def indexEdges(self, bool_t force = False):
 		"""
