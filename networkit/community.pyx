@@ -338,7 +338,7 @@ cdef extern from "<networkit/community/PLM.hpp>":
 
 	cdef cppclass _PLM "NetworKit::PLM"(_CommunityDetectionAlgorithm):
 		_PLM(_Graph _G) except +
-		_PLM(_Graph _G, bool_t refine, double gamma, string par, count maxIter, bool_t turbo, bool_t recurse) except +
+		_PLM(_Graph _G, bool_t refine, double gamma, string par, count maxIter, bool_t turbo, bool_t recurse, _Partition _zeta) except +
 		map[string, vector[count]] getTiming() except +
 
 cdef extern from "<networkit/community/PLM.hpp>" namespace "NetworKit::PLM":
@@ -372,9 +372,9 @@ cdef class PLM(CommunityDetector):
 			use recursive coarsening, see http://journals.aps.org/pre/abstract/10.1103/PhysRevE.89.049902 for some explanations (default: true)
 	"""
 
-	def __cinit__(self, Graph G not None, refine=False, gamma=1.0, par="balanced", maxIter=32, turbo=True, recurse=True):
+	def __cinit__(self, Graph G not None, refine=False, gamma=1.0, par="balanced", maxIter=32, turbo=True, recurse=True, Partition zeta=Partition(0)):
 		self._G = G
-		self._this = new _PLM(G._this, refine, gamma, stdstring(par), maxIter, turbo, recurse)
+		self._this = new _PLM(G._this, refine, gamma, stdstring(par), maxIter, turbo, recurse, zeta._this)
 
 	def getTiming(self):
 		"""  Get detailed time measurements.

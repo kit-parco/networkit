@@ -19,21 +19,25 @@
 namespace NetworKit {
 
 PLM::PLM(const Graph &G, bool refine, double gamma, std::string par, count maxIter, bool turbo,
-         bool recurse)
-    : CommunityDetectionAlgorithm(G), parallelism(std::move(par)), refine(refine), gamma(gamma),
+         bool recurse, Partition zeta)
+    : CommunityDetectionAlgorithm(G), zeta(zeta), parallelism(std::move(par)), refine(refine), gamma(gamma),
       maxIter(maxIter), turbo(turbo), recurse(recurse) {}
 
-PLM::PLM(const Graph& G, const PLM& other) : CommunityDetectionAlgorithm(G), parallelism(other.parallelism), refine(other.refine), gamma(other.gamma), maxIter(other.maxIter), turbo(other.turbo), recurse(other.recurse) {}
+PLM::PLM(const Graph& G, const PLM& other) : CommunityDetectionAlgorithm(G), zeta(other.zeta), parallelism(other.parallelism), refine(other.refine), gamma(other.gamma), maxIter(other.maxIter), turbo(other.turbo), recurse(other.recurse) {}
 
 void PLM::run() {
     Aux::SignalHandler handler;
 
     count z = G->upperNodeIdBound();
 
-    // init communities to singletons
-    Partition zeta(z);
-    zeta.allToSingletons();
+    // init communities to singletons if none given as input
+    if (zeta.numberOfSubsets() == 0) {
+        zeta = Partition(z);
+        zeta.allToSingletons();
+    }
+    
     index o = zeta.upperBound();
+
 
     // init graph-dependent temporaries
     std::vector<double> volNode(z, 0.0);
@@ -51,7 +55,8 @@ void PLM::run() {
     std::vector<double> volCommunity(o, 0.0);
     zeta.parallelForEntries([&](node u, index C) { // set volume for all communities
         if (C != none)
-            volCommunity[C] = volNode[u];
+            #pragma omp atomic
+            volCommunity[C] += volNode[u];
     });
 
     // first move phase
