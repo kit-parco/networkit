@@ -7,6 +7,7 @@
 
 #include <gtest/gtest.h>
 
+#include <networkit/auxiliary/Parallelism.hpp>
 #include <networkit/community/PLP.hpp>
 #include <networkit/community/PLM.hpp>
 #include <networkit/community/ParallelAgglomerativeClusterer.hpp>
@@ -37,8 +38,11 @@
 #include <networkit/community/PartitionFragmentation.hpp>
 #include <networkit/generators/ClusteredRandomGraphGenerator.hpp>
 #include <networkit/generators/ErdosRenyiGenerator.hpp>
+#include <networkit/generators/LFRGenerator.hpp>
 #include <networkit/community/CoverF1Similarity.hpp>
+#include <networkit/community/LFM.hpp>
 #include <networkit/community/OverlappingNMIDistance.hpp>
+#include <networkit/scd/LocalTightnessExpansion.hpp>
 
 #include <tlx/unused.hpp>
 
@@ -807,6 +811,43 @@ TEST_F(CommunityGTest, testOverlappingNMIDistance) {
         EXPECT_THROW(distance.getDissimilarity(G1, cover2, cover1), std::invalid_argument);
         EXPECT_THROW(distance.getDissimilarity(G1, cover2, cover2), std::invalid_argument);
     }
+}
+
+TEST_F(CommunityGTest, testLFM) {
+    // Disable and later restore parallelism as LFR is not deterministic otherwise
+    int numThreads = Aux::getMaxNumberOfThreads();
+    Aux::setNumberOfThreads(1);
+    Aux::Random::setSeed(42, false);
+
+    LFRGenerator lfr(1000);
+    lfr.generatePowerlawDegreeSequence(20, 50, -2);
+    lfr.generatePowerlawCommunitySizeSequence(20, 100, -1);
+    lfr.setMu(0.2);
+    lfr.run();
+
+    Graph G = lfr.getGraph();
+    Cover C(lfr.getPartition());
+
+    LocalTightnessExpansion scd(G);
+    LFM lfm(G, scd);
+    lfm.run();
+    Cover lfm_cover = lfm.getCover();
+
+    CoverF1Similarity sim(G, C, lfm_cover);
+    sim.run();
+
+    EXPECT_GE(sim.getWeightedAverage(), 0.9);
+
+    CoverF1Similarity sim_rev(G, lfm_cover, C);
+    sim_rev.run();
+
+    EXPECT_GE(sim_rev.getWeightedAverage(), 0.9);
+
+    for (node u = 0; u < 1000; ++u) {
+        EXPECT_TRUE(lfm_cover.contains(u));
+    }
+
+    Aux::setNumberOfThreads(numThreads);
 }
 
 } /* namespace NetworKit */

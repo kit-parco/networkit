@@ -1,4 +1,3 @@
-from libc.stdint cimport uint64_t
 from libcpp cimport bool as bool_t
 from libcpp.map cimport map
 from libcpp.set cimport set
@@ -6,12 +5,8 @@ from libcpp.utility cimport pair
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 
-ctypedef uint64_t index
-ctypedef index node
-
 from cython.operator import dereference
 
-from .graph cimport _Graph, Graph
 from .base cimport _Algorithm, Algorithm
 from .structures cimport _Cover, Cover
 
@@ -20,18 +15,7 @@ def stdstring(pystring):
 	pybytes = pystring.encode("utf-8")
 	return pybytes
 
-cdef extern from "<networkit/scd/SelectiveCommunityDetector.hpp>":
-
-	cdef cppclass _SelectiveCommunityDetector "NetworKit::SelectiveCommunityDetector":
-		_SelectiveCommunityDetector(_Graph G) except +
-		map[node, set[node]] run(set[node] seeds) except +
-		set[node] expandOneCommunity(node seed) except +
-		set[node] expandOneCommunity(set[node] seeds) except +
-
 cdef class SelectiveCommunityDetector:
-	cdef _SelectiveCommunityDetector *_this
-	cdef Graph _G
-
 	def __init__(self, *args, **namedargs):
 		if type(self) == SelectiveCommunityDetector:
 			raise RuntimeError("Error, you may not use SelectiveCommunityDetector directly, use a sub-class instead")

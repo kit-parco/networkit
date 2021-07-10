@@ -18,12 +18,14 @@ networkit_add_module(community
     IsolatedInterpartitionConductance.cpp
     IsolatedInterpartitionExpansion.cpp
     JaccardMeasure.cpp
+    LFM.cpp
     LPDegreeOrdered.cpp
     LocalCoverEvaluation.cpp
     LocalPartitionEvaluation.cpp
     Modularity.cpp
     NMIDistance.cpp
     NodeStructuralRandMeasure.cpp
+    OverlappingCommunityDetectionAlgorithm.cpp
     PLM.cpp
     PLP.cpp
     ParallelAgglomerativeClusterer.cpp
@@ -37,7 +39,7 @@ networkit_add_module(community
     )
 
 networkit_module_link_modules(community
-    auxiliary base coarsening components flow graph matching structures)
+    auxiliary base coarsening components flow graph matching scd structures)
 
 add_subdirectory(test)
 
