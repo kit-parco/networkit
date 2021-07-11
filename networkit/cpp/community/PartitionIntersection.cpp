@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <algorithm>
 
 #include <networkit/community/PartitionIntersection.hpp>

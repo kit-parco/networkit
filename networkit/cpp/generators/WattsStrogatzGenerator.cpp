@@ -5,8 +5,6 @@
  *      Author: Simon Bischof
  */
 
-// networkit-format
-
 #include <limits>
 
 #include <networkit/auxiliary/Random.hpp>

@@ -5,8 +5,6 @@
  *      Author: Henning
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_CENTRALITY_PAGE_RANK_HPP_
 #define NETWORKIT_CENTRALITY_PAGE_RANK_HPP_
 

@@ -1,6 +1,5 @@
 #ifndef NETWORKIT_AUXILIARY_HASH_UTILS_HPP_
 #define NETWORKIT_AUXILIARY_HASH_UTILS_HPP_
-// networkit-format
 
 #include <utility>
 

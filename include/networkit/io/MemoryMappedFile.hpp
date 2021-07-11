@@ -1,3 +1,4 @@
+// no-networkit-format
 /*
  * MemoryMappedFile.hpp
  *

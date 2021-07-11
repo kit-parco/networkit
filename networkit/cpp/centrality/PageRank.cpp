@@ -5,8 +5,6 @@
  *      Author: Henning
  */
 
-// networkit-format
-
 #include <networkit/auxiliary/NumericTools.hpp>
 #include <networkit/auxiliary/Parallel.hpp>
 #include <networkit/auxiliary/SignalHandling.hpp>

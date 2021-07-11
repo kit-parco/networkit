@@ -4,7 +4,6 @@
  *  Created on: 18.06.2013
  *      Author: cls
  */
-// networkit-format
 
 #include <fstream>
 #include <sstream>

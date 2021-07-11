@@ -5,8 +5,6 @@
  *      Author: Christian Staudt (christian.staudt@kit.edu)
  */
 
-// networkit-format
-
 #include <gtest/gtest.h>
 
 #include <networkit/auxiliary/Log.hpp>

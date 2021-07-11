@@ -14,8 +14,6 @@
  *
  */
 
-// networkit-format
-
 #include <vector>
 
 #include <networkit/auxiliary/Log.hpp>

@@ -5,8 +5,6 @@
  *      Author: Kolja Esders
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_LINKPREDICTION_LINK_THRESHOLDER_HPP_
 #define NETWORKIT_LINKPREDICTION_LINK_THRESHOLDER_HPP_
 

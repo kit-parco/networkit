@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/auxiliary/Parallelism.hpp>
 #include <networkit/auxiliary/Log.hpp>
 

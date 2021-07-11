@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <atomic>
 #include <csignal>
 #include <exception>

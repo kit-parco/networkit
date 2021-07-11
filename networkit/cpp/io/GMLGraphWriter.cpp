@@ -5,8 +5,6 @@
  *      Author: Stefan Bertsch
  */
 
-// networkit-format
-
 #include <fstream>
 
 #include <networkit/auxiliary/Enforce.hpp>

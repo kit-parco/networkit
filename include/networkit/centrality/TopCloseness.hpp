@@ -5,8 +5,6 @@
  *      Author: ebergamini, michele borassi
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_CENTRALITY_TOP_CLOSENESS_HPP_
 #define NETWORKIT_CENTRALITY_TOP_CLOSENESS_HPP_
 

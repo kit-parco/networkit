@@ -3,7 +3,6 @@
  *
  * Author: Hung Tran <htran@ae.cs.uni-frankfurt.de>
  */
-// networkit-format
 #ifndef RANDOMIZATION_CURVEBALL_IMPL_H
 #define RANDOMIZATION_CURVEBALL_IMPL_H
 

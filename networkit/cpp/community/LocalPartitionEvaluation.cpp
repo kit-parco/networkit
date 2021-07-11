@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/auxiliary/Log.hpp>
 #include <networkit/community/LocalPartitionEvaluation.hpp>
 

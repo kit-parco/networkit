@@ -1,8 +1,6 @@
 #ifndef NETWORKIT_ALGEBRAIC_CSR_MATRIX_HPP_
 #define NETWORKIT_ALGEBRAIC_CSR_MATRIX_HPP_
 
-// networkit-format
-
 #include <networkit/algebraic/CSRGeneralMatrix.hpp>
 
 // For compatibility with the previous CSRMatrix implementation.

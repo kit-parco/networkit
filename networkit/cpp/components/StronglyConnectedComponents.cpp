@@ -8,8 +8,6 @@
  *               Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #include <stack>
 
 #include <networkit/auxiliary/Log.hpp>

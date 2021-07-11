@@ -6,8 +6,6 @@
  *              Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NDEBUG
 #include <algorithm>
 #endif

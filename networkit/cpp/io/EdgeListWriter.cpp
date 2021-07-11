@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #include <fstream>
 
 #include <networkit/auxiliary/Enforce.hpp>

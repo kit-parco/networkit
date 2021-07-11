@@ -5,8 +5,6 @@
  *      Author: Christian Staudt
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_MATCHING_LOCAL_MAX_MATCHER_HPP_
 #define NETWORKIT_MATCHING_LOCAL_MAX_MATCHER_HPP_
 

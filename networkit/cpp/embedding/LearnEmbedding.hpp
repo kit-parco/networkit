@@ -12,8 +12,6 @@
  *
  */
 
-// networkit-format
-
 #ifndef LEARN_EMBEDDINGS_HPP
 #define LEARN_EMBEDDINGS_HPP
 

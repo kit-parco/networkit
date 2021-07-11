@@ -1,3 +1,4 @@
+// no-networkit-format
 /*
  * Author: Michael Hamann <michael.hamann@kit.edu>
  */

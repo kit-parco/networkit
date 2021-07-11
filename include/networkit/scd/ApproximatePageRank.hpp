@@ -1,4 +1,3 @@
-// networkit-format
 /*
  * ApproximatePageRank.hpp
  *

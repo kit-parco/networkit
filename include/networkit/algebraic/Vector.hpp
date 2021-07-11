@@ -5,8 +5,6 @@
  *      Author: Michael Wegner (michael.wegner@student.kit.edu)
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_ALGEBRAIC_VECTOR_HPP_
 #define NETWORKIT_ALGEBRAIC_VECTOR_HPP_
 

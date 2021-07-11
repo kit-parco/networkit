@@ -1,4 +1,3 @@
-// networkit-format
 
 #ifndef NETWORKIT_IO_COVER_READER_HPP_
 #define NETWORKIT_IO_COVER_READER_HPP_

@@ -1,4 +1,3 @@
-// networkit-format
 #include <unordered_map>
 
 #include <networkit/auxiliary/IncrementalUniformRandomSelector.hpp>

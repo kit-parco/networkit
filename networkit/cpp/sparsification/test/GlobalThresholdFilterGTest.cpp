@@ -1,4 +1,3 @@
-// networkit-format
 
 #include <gtest/gtest.h>
 

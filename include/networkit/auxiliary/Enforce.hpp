@@ -1,3 +1,4 @@
+// no-networkit-format
 #ifndef NETWORKIT_AUXILIARY_ENFORCE_HPP_
 #define NETWORKIT_AUXILIARY_ENFORCE_HPP_
 

@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #include <numeric>
 #include <omp.h>
 

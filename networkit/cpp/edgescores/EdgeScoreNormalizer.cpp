@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/edgescores/EdgeScoreNormalizer.hpp>
 
 namespace NetworKit {

@@ -5,8 +5,6 @@
  *              Alexander van der Grinten <avdgrinten@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_CENTRALITY_GED_WALK_HPP_
 #define NETWORKIT_CENTRALITY_GED_WALK_HPP_
 

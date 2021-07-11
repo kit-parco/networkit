@@ -5,8 +5,6 @@
  *      Author: Maximilian Vogel
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_GRAPH_TOOL_BINARY_WRITER_HPP_
 #define NETWORKIT_IO_GRAPH_TOOL_BINARY_WRITER_HPP_
 

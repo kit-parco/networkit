@@ -4,7 +4,6 @@
  *  Created on: Apr 10, 2013
  *      Author: Henning
  */
-// networkit-format
 
 #include <cmath>
 #include <set>

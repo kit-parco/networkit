@@ -3,7 +3,6 @@
  *
  * Author: Hung Tran <htran@ae.cs.uni-frankfurt.de>
  */
-// networkit-format
 #include <algorithm>
 #include <cassert>
 #include <numeric>

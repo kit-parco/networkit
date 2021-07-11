@@ -7,8 +7,6 @@
  *              Marvin Ritter <marvin.ritter@gmail.com>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_GRAPH_GRAPH_HPP_
 #define NETWORKIT_GRAPH_GRAPH_HPP_
 

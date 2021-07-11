@@ -6,8 +6,6 @@
 #include <networkit/graph/Dijkstra.hpp>
 #include <networkit/graph/GraphTools.hpp>
 
-// networkit-format
-
 namespace NetworKit {
 
 class TraversalGTest : public testing::TestWithParam<std::pair<bool, bool>> {

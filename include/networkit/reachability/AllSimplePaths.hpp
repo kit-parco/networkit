@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_REACHABILITY_ALL_SIMPLE_PATHS_HPP_
 #define NETWORKIT_REACHABILITY_ALL_SIMPLE_PATHS_HPP_
 

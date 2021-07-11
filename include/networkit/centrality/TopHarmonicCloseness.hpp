@@ -8,8 +8,6 @@
 #ifndef NETWORKIT_CENTRALITY_TOP_HARMONIC_CLOSENESS_HPP_
 #define NETWORKIT_CENTRALITY_TOP_HARMONIC_CLOSENESS_HPP_
 
-// networkit-format
-
 #include <memory>
 
 #include <networkit/base/Algorithm.hpp>

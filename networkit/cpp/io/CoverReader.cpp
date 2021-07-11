@@ -1,4 +1,3 @@
-// networkit-format
 
 #include <networkit/io/CoverReader.hpp>
 

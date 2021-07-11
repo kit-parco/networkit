@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/community/AdjustedRandMeasure.hpp>
 #include <networkit/community/PartitionIntersection.hpp>
 

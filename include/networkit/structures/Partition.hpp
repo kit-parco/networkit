@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_STRUCTURES_PARTITION_HPP_
 #define NETWORKIT_STRUCTURES_PARTITION_HPP_
 

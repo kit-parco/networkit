@@ -5,8 +5,6 @@
  *      Author: ebergamini, michele borassi
  */
 
-// networkit-format
-
 #include <omp.h>
 #include <queue>
 #include <stack>

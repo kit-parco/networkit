@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman
  */
 
-// networkit-format
-
 #include <gtest/gtest.h>
 
 #include <algorithm>

@@ -6,8 +6,6 @@
  *              Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_GENERATORS_CLUSTERED_RANDOM_GRAPH_GENERATOR_HPP_
 #define NETWORKIT_GENERATORS_CLUSTERED_RANDOM_GRAPH_GENERATOR_HPP_
 

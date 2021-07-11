@@ -1,3 +1,4 @@
+// no-networkit-format
 /*
  * Header which provides parallel STL implementations when available.
  */

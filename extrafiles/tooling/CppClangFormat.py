@@ -49,8 +49,8 @@ def findClangFormat():
 
 	raise FileNotFoundError("clang-format binary not found. We searched for:\n " + "\n ".join(allowed))
 
-def subscribedToFormat(filename, pattern = "networkit-format"):
-	"""If pattern is present within the file, this file subscribed to auto formatting."""
+def unsubscribedToFormat(filename, pattern = "no-networkit-format"):
+	"""If pattern is present within the file, this file unsubscribed to auto formatting."""
 	with open(filename, 'r') as file:
 		return any( ((pattern in line) for line in file) )
 
@@ -72,7 +72,7 @@ clangFormatCommand = findClangFormat()
 with tempfile.TemporaryDirectory(dir=nkt.getNetworKitRoot()) as tempDir:
 	files = nkt.getCXXFiles()
 	for file in files:
-		if not subscribedToFormat(file):
+		if unsubscribedToFormat(file):
 			numberFileSkipped += 1
 			continue
 

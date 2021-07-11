@@ -5,8 +5,6 @@
  *      Author: Gerd Lindner
  */
 
-// networkit-format
-
 #include <networkit/graph/GraphBuilder.hpp>
 #include <networkit/sparsification/GlobalThresholdFilter.hpp>
 

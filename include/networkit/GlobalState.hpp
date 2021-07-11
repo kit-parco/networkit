@@ -1,4 +1,3 @@
-// networkit-format
 
 #ifndef NETWORKIT_GLOBAL_STATE_HPP_
 #define NETWORKIT_GLOBAL_STATE_HPP_

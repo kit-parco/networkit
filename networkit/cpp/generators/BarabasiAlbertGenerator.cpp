@@ -4,7 +4,6 @@
  *  Created on: May 28, 2013
  *      Author: forigem, Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 
 #include <random>
 #include <unordered_set>

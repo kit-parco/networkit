@@ -1,4 +1,3 @@
-// networkit-format
 /* GCE.hpp
  *
  * Created on: 06.05.2013

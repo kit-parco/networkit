@@ -6,8 +6,6 @@
  *              Alexander van der Grinten <avdgrinten@hu-berlin.de>
  */
 
-// networkit-format
-
 #include <numeric>
 #include <omp.h>
 #include <queue>

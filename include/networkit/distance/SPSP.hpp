@@ -4,8 +4,6 @@
  *      Author: Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_DISTANCE_SPSP_HPP_
 #define NETWORKIT_DISTANCE_SPSP_HPP_
 

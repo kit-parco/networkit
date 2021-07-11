@@ -5,8 +5,6 @@
  *      Author: Christian Staudt
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_PARTITION_READER_HPP_
 #define NETWORKIT_IO_PARTITION_READER_HPP_
 

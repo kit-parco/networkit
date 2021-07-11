@@ -12,8 +12,6 @@
  *
  */
 
-// networkit-format
-
 #ifndef BIASEDRANDOMWALK_HPP
 #define BIASEDRANDOMWALK_HPP
 

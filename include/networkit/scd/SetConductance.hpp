@@ -1,4 +1,3 @@
-// networkit-format
 #ifndef NETWORKIT_SCD_SET_CONDUCTANCE_HPP_
 #define NETWORKIT_SCD_SET_CONDUCTANCE_HPP_
 

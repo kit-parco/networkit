@@ -4,7 +4,6 @@
  *  Created on: May 28, 2013
  *      Author: forigem
  */
-// networkit-format
 
 #ifndef NETWORKIT_GENERATORS_BARABASI_ALBERT_GENERATOR_HPP_
 #define NETWORKIT_GENERATORS_BARABASI_ALBERT_GENERATOR_HPP_

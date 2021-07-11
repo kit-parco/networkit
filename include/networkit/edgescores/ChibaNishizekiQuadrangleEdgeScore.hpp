@@ -5,8 +5,6 @@
  *      Author: Michael Hamann, Gerd Lindner
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_EDGESCORES_CHIBA_NISHIZEKI_QUADRANGLE_EDGE_SCORE_HPP_
 #define NETWORKIT_EDGESCORES_CHIBA_NISHIZEKI_QUADRANGLE_EDGE_SCORE_HPP_
 

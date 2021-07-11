@@ -12,8 +12,6 @@
  *
  */
 
-// networkit-format
-
 #include <random>
 #include <vector>
 

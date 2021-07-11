@@ -5,8 +5,6 @@
  *      Author: Alexander van der Grinten
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_SNAP_GRAPH_READER_HPP_
 #define NETWORKIT_IO_SNAP_GRAPH_READER_HPP_
 

@@ -1,4 +1,3 @@
-// networkit-format
 #include <networkit/scd/CombinedSCD.hpp>
 
 namespace NetworKit {

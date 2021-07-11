@@ -4,7 +4,6 @@
  *  Created on: 26.05.2018
  *      Author: Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 #ifndef RANDOMIZATION_GLOBAL_CURVEBALL_IMPL_H_
 #define RANDOMIZATION_GLOBAL_CURVEBALL_IMPL_H_
 

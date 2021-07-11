@@ -5,8 +5,6 @@
  *		 Author: nemes, Eugenio Angriman
  */
 
-// networkit-format
-
 #ifndef NDEBUG
 #include <algorithm>
 #endif

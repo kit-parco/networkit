@@ -4,7 +4,6 @@
  *  Created on: 09.07.2014
  *      Author: Simon Bischof
  */
-// networkit-format
 #ifndef NETWORKIT_GENERATORS_WATTS_STROGATZ_GENERATOR_HPP_
 #define NETWORKIT_GENERATORS_WATTS_STROGATZ_GENERATOR_HPP_
 

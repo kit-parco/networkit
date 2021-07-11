@@ -1,4 +1,3 @@
-// networkit-format
 #ifndef NETWORKIT_SCD_LOCAL_T_HPP_
 #define NETWORKIT_SCD_LOCAL_T_HPP_
 

@@ -6,8 +6,6 @@
  *              Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_COMPONENTS_COMPONENT_DECOMPOSITION_HPP_
 #define NETWORKIT_COMPONENTS_COMPONENT_DECOMPOSITION_HPP_
 

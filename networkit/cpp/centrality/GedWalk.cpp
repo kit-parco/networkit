@@ -5,8 +5,6 @@
  *             Alexander van der Grinten <avdgrinten@hu-berlin.de>
  */
 
-// networkit-format
-
 #include <cmath>
 #include <omp.h>
 

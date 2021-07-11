@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <stdexcept>
 
 #include <networkit/io/MemoryMappedFile.hpp>

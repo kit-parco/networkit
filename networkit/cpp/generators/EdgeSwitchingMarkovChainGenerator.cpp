@@ -1,4 +1,3 @@
-// networkit-format
 
 #include <networkit/generators/EdgeSwitchingMarkovChainGenerator.hpp>
 #include <networkit/generators/HavelHakimiGenerator.hpp>

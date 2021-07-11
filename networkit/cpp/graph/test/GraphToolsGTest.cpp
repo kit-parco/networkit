@@ -5,8 +5,6 @@
  *      Author: Maximilian Vogel
  */
 
-// networkit-format
-
 #include <array>
 
 #include <gtest/gtest.h>

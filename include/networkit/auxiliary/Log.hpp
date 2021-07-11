@@ -1,3 +1,4 @@
+// no-networkit-format
 #ifndef NETWORKIT_AUXILIARY_LOG_HPP_
 #define NETWORKIT_AUXILIARY_LOG_HPP_
 

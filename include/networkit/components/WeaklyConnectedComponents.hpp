@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_COMPONENTS_WEAKLY_CONNECTED_COMPONENTS_HPP_
 #define NETWORKIT_COMPONENTS_WEAKLY_CONNECTED_COMPONENTS_HPP_
 

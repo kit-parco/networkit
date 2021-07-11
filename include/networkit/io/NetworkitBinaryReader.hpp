@@ -4,8 +4,6 @@
  *      Author: Charmaine Ndolo <charmaine.ndolo@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 #define NETWORKIT_IO_NETWORKIT_BINARY_READER_HPP_
 

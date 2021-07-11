@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #include <algorithm>
 #include <atomic>
 #include <memory>

@@ -4,7 +4,6 @@
  *  Created on: Jun 12, 2013
  *      Author: Henning
  */
-// networkit-format
 
 #ifndef NETWORKIT_IO_DIBAP_GRAPH_READER_HPP_
 #define NETWORKIT_IO_DIBAP_GRAPH_READER_HPP_

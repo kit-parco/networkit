@@ -5,8 +5,6 @@
  *      Author: Henning, Manuel Penschuck <networkit@manuel.jetzt>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_VIZ_POINT_HPP_
 #define NETWORKIT_VIZ_POINT_HPP_
 

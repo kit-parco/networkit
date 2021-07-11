@@ -5,8 +5,6 @@
  *      Author: dhoske
  */
 
-// networkit-format
-
 #include <limits>
 #include <type_traits>
 

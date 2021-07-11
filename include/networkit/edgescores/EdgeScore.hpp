@@ -5,8 +5,6 @@
  *      Author: Gerd Lindner
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_EDGESCORES_EDGE_SCORE_HPP_
 #define NETWORKIT_EDGESCORES_EDGE_SCORE_HPP_
 

@@ -12,8 +12,6 @@
  *
  */
 
-// networkit-format
-
 #ifndef ALIASSAMPLER_HPP
 #define ALIASSAMPLER_HPP
 

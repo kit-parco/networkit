@@ -1,4 +1,3 @@
-// networkit-format
 
 #ifndef NETWORKIT_BASE_ALGORITHM_HPP_
 #define NETWORKIT_BASE_ALGORITHM_HPP_

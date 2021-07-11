@@ -7,7 +7,6 @@
  *  Created on: 23.05.2018
  *      Author: Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 
 #ifndef NETWORKIT_RANDOMIZATION_GLOBAL_TRADE_SEQUENCE_HPP_
 #define NETWORKIT_RANDOMIZATION_GLOBAL_TRADE_SEQUENCE_HPP_

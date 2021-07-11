@@ -1,3 +1,4 @@
+// no-networkit-format
 #ifndef NETWORKIT_CLIQUE_MAXIMAL_CLIQUES_HPP_
 #define NETWORKIT_CLIQUE_MAXIMAL_CLIQUES_HPP_
 

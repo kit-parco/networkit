@@ -4,7 +4,6 @@
  *  Created on: Apr 10, 2013
  *      Author: Henning
  */
-// networkit-format
 
 #ifndef NETWORKIT_VIZ_POSTSCRIPT_WRITER_HPP_
 #define NETWORKIT_VIZ_POSTSCRIPT_WRITER_HPP_

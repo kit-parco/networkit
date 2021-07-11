@@ -5,8 +5,6 @@
  *      Author: forigem
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_SNAP_EDGE_LIST_PARTITION_READER_HPP_
 #define NETWORKIT_IO_SNAP_EDGE_LIST_PARTITION_READER_HPP_
 

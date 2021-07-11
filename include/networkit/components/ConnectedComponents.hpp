@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_COMPONENTS_CONNECTED_COMPONENTS_HPP_
 #define NETWORKIT_COMPONENTS_CONNECTED_COMPONENTS_HPP_
 

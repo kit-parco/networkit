@@ -1,8 +1,6 @@
 #ifndef NETWORKIT_AUXILIARY_ARRAY_TOOLS_HPP_
 #define NETWORKIT_AUXILIARY_ARRAY_TOOLS_HPP_
 
-// networkit-format
-
 #include <cmath>
 #include <utility>
 #include <vector>

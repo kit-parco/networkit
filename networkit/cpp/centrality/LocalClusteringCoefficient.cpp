@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/centrality/LocalClusteringCoefficient.hpp>
 #include <omp.h>
 

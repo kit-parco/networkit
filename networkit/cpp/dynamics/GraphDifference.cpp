@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <string>
 
 #include <networkit/auxiliary/Log.hpp>

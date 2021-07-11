@@ -1,4 +1,3 @@
-// networkit-format
 #include <stdexcept>
 
 #include <networkit/auxiliary/Random.hpp>

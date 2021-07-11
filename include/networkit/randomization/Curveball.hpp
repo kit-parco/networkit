@@ -4,7 +4,6 @@
  *  Created on: 26.05.2018
  *      Author:  Hung Tran <htran@ae.cs.uni-frankfurt.de>, Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 
 #ifndef NETWORKIT_RANDOMIZATION_CURVEBALL_HPP_
 #define NETWORKIT_RANDOMIZATION_CURVEBALL_HPP_

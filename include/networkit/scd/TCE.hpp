@@ -1,4 +1,3 @@
-// networkit-format
 #ifndef NETWORKIT_SCD_TCE_HPP_
 #define NETWORKIT_SCD_TCE_HPP_
 

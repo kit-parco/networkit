@@ -4,7 +4,6 @@
  *  Created on: 21.08.2018
  *      Author: Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 
 #ifndef NETWORKIT_RANDOMIZATION_DEGREE_PRESERVING_SHUFFLE_HPP_
 #define NETWORKIT_RANDOMIZATION_DEGREE_PRESERVING_SHUFFLE_HPP_

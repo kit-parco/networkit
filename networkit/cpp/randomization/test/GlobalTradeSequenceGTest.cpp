@@ -4,7 +4,6 @@
  *  Created on: 19.06.2018
  *      Author: Manuel Penschuck (networkit@manuel.jetzt)
  */
-// networkit-format
 
 #include <map>
 #include <gtest/gtest.h>

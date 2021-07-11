@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_EDGE_LIST_WRITER_HPP_
 #define NETWORKIT_IO_EDGE_LIST_WRITER_HPP_
 

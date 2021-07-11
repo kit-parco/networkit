@@ -6,8 +6,6 @@
  *           Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #include <algorithm>
 #include <atomic>
 #include <stdexcept>

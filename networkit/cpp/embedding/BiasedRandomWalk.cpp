@@ -12,8 +12,6 @@
  *
  */
 
-// networkit-format
-
 #include <algorithm>
 #include <utility>
 

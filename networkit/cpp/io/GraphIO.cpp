@@ -5,8 +5,6 @@
  *      Author: Christian Staudt
  */
 
-// networkit-format
-
 #include <fstream>
 #include <networkit/io/GraphIO.hpp>
 

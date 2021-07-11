@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <fstream>
 #include <set>
 

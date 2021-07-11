@@ -5,8 +5,6 @@
  * Author: Armin Wiebigke
  */
 
-// networkit-format
-
 #include <gtest/gtest.h>
 
 #include <networkit/community/LouvainMapEquation.hpp>

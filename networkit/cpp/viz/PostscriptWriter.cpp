@@ -4,7 +4,6 @@
  *  Created on: Apr 10, 2013
  *      Author: Henning
  */
-// networkit-format
 
 #include <networkit/community/ClusteringGenerator.hpp>
 #include <networkit/viz/PostscriptWriter.hpp>

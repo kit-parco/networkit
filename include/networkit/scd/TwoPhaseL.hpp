@@ -1,4 +1,3 @@
-// networkit-format
 #ifndef NETWORKIT_SCD_TWO_PHASE_L_HPP_
 #define NETWORKIT_SCD_TWO_PHASE_L_HPP_
 

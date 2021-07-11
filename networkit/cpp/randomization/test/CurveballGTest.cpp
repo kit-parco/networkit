@@ -4,7 +4,6 @@
  *  Created on: Jul 12, 2017
  *  Author: Author: Hung Tran <htran@ae.cs.uni-frankfurt.de>
  */
-// networkit-format
 
 #include <gtest/gtest.h>
 #include <networkit/graph/Graph.hpp>

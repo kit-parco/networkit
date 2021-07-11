@@ -1,3 +1,4 @@
+// no-networkit-format
 
 #include <networkit/auxiliary/Parallel.hpp>
 #include <networkit/auxiliary/SignalHandling.hpp>

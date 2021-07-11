@@ -1,6 +1,5 @@
 #ifndef NETWORKIT_COMMUNITY_OVERLAPPING_NMI_DISTANCE_HPP_
 #define NETWORKIT_COMMUNITY_OVERLAPPING_NMI_DISTANCE_HPP_
-// networkit-format
 
 #include <unordered_map>
 

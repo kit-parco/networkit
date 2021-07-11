@@ -1,3 +1,4 @@
+// no-networkit-format
 /* 
  * File:   AffectedNodes.h
  * Author: paddya

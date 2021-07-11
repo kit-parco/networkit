@@ -4,7 +4,6 @@
  *  Created on: Jul 11, 2017
  *      Author: Hung Tran <htran@ae.cs.uni-frankfurt.de>
  */
-// networkit-format
 
 #ifndef NETWORKIT_RANDOMIZATION_CURVEBALL_GLOBAL_TRADE_GENERATOR_HPP_
 #define NETWORKIT_RANDOMIZATION_CURVEBALL_GLOBAL_TRADE_GENERATOR_HPP_

@@ -5,8 +5,6 @@
  *      Author: dhoske
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_MATRIX_MARKET_READER_HPP_
 #define NETWORKIT_IO_MATRIX_MARKET_READER_HPP_
 

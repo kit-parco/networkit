@@ -1,4 +1,3 @@
-// networkit-format
 #ifndef NETWORKIT_DISTANCE_ALL_SIMPLE_PATHS_HPP_
 #define NETWORKIT_DISTANCE_ALL_SIMPLE_PATHS_HPP_
 #warning \

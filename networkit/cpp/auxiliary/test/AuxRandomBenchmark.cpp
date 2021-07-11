@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <gtest/gtest.h>
 
 #include <tlx/unused.hpp>

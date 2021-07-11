@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman
  */
 
-// networkit-format
-
 #include <memory>
 #include <omp.h>
 

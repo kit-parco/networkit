@@ -4,7 +4,6 @@
  * Created on: 2019-10-31
  * Author: Armin Wiebigke
  */
-// networkit-format
 
 #include <gtest/gtest.h>
 

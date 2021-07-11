@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_DISTANCE_BIDIRECTIONAL_DIJKSTRA_HPP_
 #define NETWORKIT_DISTANCE_BIDIRECTIONAL_DIJKSTRA_HPP_
 

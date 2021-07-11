@@ -1,4 +1,3 @@
-// networkit-format
 /*
  * StaticDegreeSequenceGenerator.cpp
  *

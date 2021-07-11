@@ -5,8 +5,6 @@
  *      Author: Maximilian Vogel (maximilian.vogel@student.kit.edu)
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_GML_GRAPH_READER_HPP_
 #define NETWORKIT_IO_GML_GRAPH_READER_HPP_
 

@@ -6,7 +6,6 @@
  *         Michael Hamann
  *         Lars Gottesbüren
  */
-// networkit-format
 
 #include <algorithm>
 #include <cassert>

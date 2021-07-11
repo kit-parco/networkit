@@ -1,4 +1,3 @@
-// networkit-format
 #include <networkit/structures/LocalCommunity.hpp>
 
 namespace NetworKit {

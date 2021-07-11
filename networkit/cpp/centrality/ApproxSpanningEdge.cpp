@@ -5,8 +5,6 @@
  *     Authors: Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #include <cassert>
 #include <cmath>
 #include <omp.h>

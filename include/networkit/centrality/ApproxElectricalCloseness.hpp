@@ -6,8 +6,6 @@
  *              Alexander van der Grinten <avdgrinten@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_CENTRALITY_APPROX_ELECTRICAL_CLOSENESS_HPP_
 #define NETWORKIT_CENTRALITY_APPROX_ELECTRICAL_CLOSENESS_HPP_
 

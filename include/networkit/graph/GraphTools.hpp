@@ -1,4 +1,3 @@
-// networkit-format
 
 #ifndef NETWORKIT_GRAPH_GRAPH_TOOLS_HPP_
 #define NETWORKIT_GRAPH_GRAPH_TOOLS_HPP_

@@ -4,7 +4,6 @@
  *  Created on: 11.05.2018
  *      Author: Roman Bange
  */
-// networkit-format
 
 #ifndef NETWORKIT_IO_KONECT_GRAPH_READER_HPP_
 #define NETWORKIT_IO_KONECT_GRAPH_READER_HPP_

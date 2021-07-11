@@ -4,7 +4,6 @@
  * Created: 2019-10-15
  * Author: Armin Wiebigke
  */
-// networkit-format
 #ifndef NETWORKIT_AUXILIARY_SPARSE_VECTOR_HPP_
 #define NETWORKIT_AUXILIARY_SPARSE_VECTOR_HPP_
 

@@ -6,8 +6,6 @@
  *              Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_ALGEBRAIC_CSR_GENERAL_MATRIX_HPP_
 #define NETWORKIT_ALGEBRAIC_CSR_GENERAL_MATRIX_HPP_
 

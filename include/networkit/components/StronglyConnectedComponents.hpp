@@ -8,8 +8,6 @@
  *               Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_COMPONENTS_STRONGLY_CONNECTED_COMPONENTS_HPP_
 #define NETWORKIT_COMPONENTS_STRONGLY_CONNECTED_COMPONENTS_HPP_
 

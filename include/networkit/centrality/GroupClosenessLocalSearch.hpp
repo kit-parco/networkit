@@ -1,8 +1,6 @@
 #ifndef NETWORKIT_CENTRALITY_GROUP_CLOSENESS_LOCAL_SEARCH_HPP_
 #define NETWORKIT_CENTRALITY_GROUP_CLOSENESS_LOCAL_SEARCH_HPP_
 
-// networkit-format
-
 #include <limits>
 #include <memory>
 #include <vector>

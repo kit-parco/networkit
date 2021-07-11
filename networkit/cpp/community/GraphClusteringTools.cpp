@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <cmath>
 #include <networkit/auxiliary/Log.hpp>
 #include <networkit/community/GraphClusteringTools.hpp>

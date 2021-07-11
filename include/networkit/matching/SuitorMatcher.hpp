@@ -6,8 +6,6 @@
  *           Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_MATCHING_SUITOR_MATCHER_HPP_
 #define NETWORKIT_MATCHING_SUITOR_MATCHER_HPP_
 

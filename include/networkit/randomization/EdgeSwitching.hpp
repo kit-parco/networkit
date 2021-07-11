@@ -4,7 +4,6 @@
  *  Created on: 19.10.2019
  *      Author:  Manuel Penschuck <networkit@manuel.jetzt>
  */
-// networkit-format
 
 #ifndef NETWORKIT_RANDOMIZATION_EDGE_SWITCHING_HPP_
 #define NETWORKIT_RANDOMIZATION_EDGE_SWITCHING_HPP_

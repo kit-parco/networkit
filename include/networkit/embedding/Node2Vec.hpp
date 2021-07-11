@@ -13,8 +13,6 @@
  *  see [https://arxiv.org/pdf/1607.00653v1.pdf]
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_EMBEDDING_NODE2_VEC_HPP_
 #define NETWORKIT_EMBEDDING_NODE2_VEC_HPP_
 

@@ -1,3 +1,4 @@
+// no-networkit-format
 /*
  * Diameter.cpp
  *

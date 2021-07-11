@@ -7,8 +7,6 @@
  *              Marvin Ritter <marvin.ritter@gmail.com>
  */
 
-// networkit-format
-
 #include <cmath>
 #include <map>
 #include <random>

@@ -5,8 +5,6 @@
  *      Author: dhoske
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_DISTANCE_INCOMPLETE_DIJKSTRA_HPP_
 #define NETWORKIT_DISTANCE_INCOMPLETE_DIJKSTRA_HPP_
 

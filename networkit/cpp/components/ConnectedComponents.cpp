@@ -5,8 +5,6 @@
  *      Author: cls
  */
 
-// networkit-format
-
 #include "ConnectedComponentsImpl.hpp"
 
 #include <networkit/components/ConnectedComponents.hpp>

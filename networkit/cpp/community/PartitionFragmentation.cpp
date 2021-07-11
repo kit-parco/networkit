@@ -1,3 +1,4 @@
+// no-networkit-format
 #include <networkit/auxiliary/SignalHandling.hpp>
 #include <networkit/community/PartitionFragmentation.hpp>
 #include <networkit/community/PartitionIntersection.hpp>

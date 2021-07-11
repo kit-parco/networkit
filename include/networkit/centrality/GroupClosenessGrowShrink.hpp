@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman <angrimae@hu-berlin.de>
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_CENTRALITY_GROUP_CLOSENESS_GROW_SHRINK_HPP_
 #define NETWORKIT_CENTRALITY_GROUP_CLOSENESS_GROW_SHRINK_HPP_
 

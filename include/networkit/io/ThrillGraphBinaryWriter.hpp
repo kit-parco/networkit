@@ -4,8 +4,6 @@
  * @author Michael Hamann
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_IO_THRILL_GRAPH_BINARY_WRITER_HPP_
 #define NETWORKIT_IO_THRILL_GRAPH_BINARY_WRITER_HPP_
 

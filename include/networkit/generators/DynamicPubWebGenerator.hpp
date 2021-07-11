@@ -4,7 +4,6 @@
  *  Created on: 15.01.2014
  *      Author: Henning
  */
-// networkit-format
 
 #ifndef NETWORKIT_GENERATORS_DYNAMIC_PUB_WEB_GENERATOR_HPP_
 #define NETWORKIT_GENERATORS_DYNAMIC_PUB_WEB_GENERATOR_HPP_

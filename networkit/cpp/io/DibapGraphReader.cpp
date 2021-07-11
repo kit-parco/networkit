@@ -5,8 +5,6 @@
  *      Author: Henning
  */
 
-// networkit-format
-
 #ifndef NETWORKIT_WINDOWS
 
 #include <networkit/auxiliary/Log.hpp>

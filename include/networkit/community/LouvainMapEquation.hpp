@@ -6,7 +6,6 @@
  *         Michael Hamann
  *         Lars Gottesbüren
  */
-// networkit-format
 
 #ifndef NETWORKIT_COMMUNITY_LOUVAIN_MAP_EQUATION_HPP_
 #define NETWORKIT_COMMUNITY_LOUVAIN_MAP_EQUATION_HPP_

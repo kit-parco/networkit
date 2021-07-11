@@ -1,8 +1,6 @@
 #ifndef NETWORKIT_AUXILIARY_SPIN_LOCK_HPP_
 #define NETWORKIT_AUXILIARY_SPIN_LOCK_HPP_
 
-// networkit-format
-
 #include <atomic>
 
 namespace Aux {

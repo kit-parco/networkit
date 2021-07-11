@@ -5,8 +5,6 @@
  *      Author: Eugenio Angriman
  */
 
-// networkit-format
-
 #include "ConnectedComponentsImpl.hpp"
 
 #include <networkit/components/WeaklyConnectedComponents.hpp>

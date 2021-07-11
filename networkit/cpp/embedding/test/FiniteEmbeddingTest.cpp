@@ -5,8 +5,6 @@
  *      Author: Klaus Ahrens
  */
 
-// networkit-format
-
 #include <iomanip>
 #include <iostream>
 
