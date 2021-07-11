@@ -6,6 +6,7 @@
 #include <tlx/container/d_ary_addressable_int_heap.hpp>
 #include <tlx/unused.hpp>
 
+#include <networkit/auxiliary/VectorComparator.hpp>
 #include <networkit/scd/LocalTightnessExpansion.hpp>
 
 #include "LocalDegreeDirectedGraph.hpp"
@@ -114,16 +115,8 @@ std::set<node> expandSeedSetInternal(const Graph &g, const std::set<node> &s, do
     std::vector<bool> inShell;
 
     // heap that contains the nodes of the shell that still need to be considered
-    class Compare {
-        const std::vector<double> &similarity;
-
-    public:
-        Compare(const std::vector<double> &similarity) : similarity(similarity) {}
-
-        bool operator()(node u, node v) { return similarity[u] > similarity[v]; }
-    };
-
-    tlx::d_ary_addressable_int_heap<node, 4, Compare> shell((Compare(nodeInternalSimilarity)));
+    tlx::d_ary_addressable_int_heap<node, 4, Aux::GreaterInVector<double>> shell{
+        nodeInternalSimilarity};
 
     double internalSimilarity = 0;
     double externalSimilarity = 0;

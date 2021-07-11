@@ -10,6 +10,7 @@
 #ifndef NETWORKIT_DISTANCE_BIDIRECTIONAL_DIJKSTRA_HPP_
 #define NETWORKIT_DISTANCE_BIDIRECTIONAL_DIJKSTRA_HPP_
 
+#include <networkit/auxiliary/VectorComparator.hpp>
 #include <networkit/distance/STSP.hpp>
 
 #include <tlx/container/d_ary_addressable_int_heap.hpp>
@@ -53,15 +54,6 @@ private:
 
     void buildPaths(std::stack<std::deque<node>> &pathStack);
 
-    struct Compare {
-    public:
-        Compare(const std::vector<edgeweight> &dist) : dist(dist) {}
-        bool operator()(node u, node v) { return dist[u] < dist[v]; }
-
-    private:
-        const std::vector<edgeweight> &dist;
-    };
-
     struct CompareST {
     public:
         CompareST(const std::vector<edgeweight> &d1, const std::vector<edgeweight> &d2)
@@ -72,8 +64,8 @@ private:
         const std::vector<edgeweight> &d1, &d2;
     };
 
-    tlx::d_ary_addressable_int_heap<node, 2, Compare> h1{Compare(dist1)};
-    tlx::d_ary_addressable_int_heap<node, 2, Compare> h2{Compare(dist2)};
+    tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<edgeweight>> h1{dist1};
+    tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<edgeweight>> h2{dist2};
     tlx::d_ary_addressable_int_heap<node, 2, CompareST> stH{CompareST(dist1, dist2)};
 };
 } // namespace NetworKit

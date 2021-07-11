@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <networkit/auxiliary/VectorComparator.hpp>
 #include <networkit/generators/ErdosRenyiGenerator.hpp>
 #include <networkit/graph/BFS.hpp>
 #include <networkit/graph/DFS.hpp>
@@ -151,20 +152,9 @@ TEST_P(TraversalGTest, testDijkstraFrom) {
     }
 
     auto dijkstra = [&](const Graph &G, const std::vector<node> &sources) {
-        struct CompareDistance {
-            CompareDistance(const std::vector<edgeweight> &distance) : distance(distance) {}
-
-            bool operator()(const node x, const node y) const noexcept {
-                return distance[x] < distance[y];
-            }
-
-        private:
-            const std::vector<edgeweight> &distance;
-        };
-
         std::vector<edgeweight> distance(G.upperNodeIdBound(),
                                          std::numeric_limits<edgeweight>::max());
-        tlx::d_ary_addressable_int_heap<node, 2, CompareDistance> heap{CompareDistance(distance)};
+        tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<edgeweight>> heap{distance};
         for (const auto u : sources) {
             distance[u] = 0;
             heap.push(u);

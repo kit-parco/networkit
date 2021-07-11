@@ -60,7 +60,8 @@ void BidirectionalDijkstra::run() {
     std::stack<std::deque<node>> pathsToBuild;
 
     // Expands a ball; idx is the ball index (either 0 or 1<<7)
-    auto expand = [&](tlx::d_ary_addressable_int_heap<node, 2, Compare> &h, uint8_t idx) {
+    auto expand = [&](tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<edgeweight>> &h,
+                      uint8_t idx) {
         node u = h.extract_top();
         if (ts != (visited[u] & ~ballMask)) {
             // u not visited yet

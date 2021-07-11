@@ -3,6 +3,7 @@
 #ifndef NETWORKIT_AUXILIARY_VECTOR_COMPARATOR_HPP_
 #define NETWORKIT_AUXILIARY_VECTOR_COMPARATOR_HPP_
 
+#include <cstdint>
 #include <vector>
 
 namespace Aux {

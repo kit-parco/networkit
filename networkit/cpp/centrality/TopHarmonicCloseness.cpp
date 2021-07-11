@@ -20,8 +20,8 @@
 namespace NetworKit {
 
 TopHarmonicCloseness::TopHarmonicCloseness(const Graph &G, count k, bool useNBbound)
-    : G(&G), k(k), useNBbound(useNBbound), prioQ(Greater<double>{hCloseness}),
-      topKNodesPQ(Less<double>{hCloseness}) {
+    : G(&G), k(k), useNBbound(useNBbound), prioQ(Aux::GreaterInVector<double>{hCloseness}),
+      topKNodesPQ(Aux::LessInVector<double>{hCloseness}) {
 
     if (k == 0 || k > G.numberOfNodes())
         throw std::runtime_error("Error: k must be in [1,...,n].");
@@ -38,7 +38,7 @@ TopHarmonicCloseness::TopHarmonicCloseness(const Graph &G, count k, bool useNBbo
         distanceGlobal.resize(omp_get_max_threads(), std::vector<edgeweight>(n));
         dijkstraHeaps.reserve(omp_get_max_threads());
         for (int i = 0; i < omp_get_max_threads(); ++i)
-            dijkstraHeaps.emplace_back(Less<edgeweight>{distanceGlobal[i]});
+            dijkstraHeaps.emplace_back(Aux::LessInVector<edgeweight>{distanceGlobal[i]});
         minEdgeWeight = std::numeric_limits<edgeweight>::max();
         G.forEdges([&](node, node, edgeweight ew) { minEdgeWeight = std::min(minEdgeWeight, ew); });
     } else {

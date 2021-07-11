@@ -12,6 +12,7 @@
 
 #include <memory>
 
+#include <networkit/auxiliary/VectorComparator.hpp>
 #include <networkit/base/Algorithm.hpp>
 #include <networkit/components/WeaklyConnectedComponents.hpp>
 #include <networkit/graph/Graph.hpp>
@@ -106,26 +107,13 @@ private:
         }
     }
 
-    template <class Type>
-    struct Greater {
-        Greater(const std::vector<Type> &vec) : vec(&vec) {}
-        bool operator()(node u, node v) const noexcept { return (*vec)[u] > (*vec)[v]; }
-        const std::vector<Type> *vec;
-    };
-
-    template <class Type>
-    struct Less {
-        Less(const std::vector<Type> &vec) : vec(&vec) {}
-        bool operator()(node u, node v) const noexcept { return (*vec)[u] < (*vec)[v]; }
-        const std::vector<Type> *vec;
-    };
-
-    tlx::d_ary_addressable_int_heap<node, 2, Greater<double>> prioQ;
-    tlx::d_ary_addressable_int_heap<node, 2, Less<double>> topKNodesPQ;
+    tlx::d_ary_addressable_int_heap<node, 2, Aux::GreaterInVector<double>> prioQ;
+    tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<double>> topKNodesPQ;
     std::vector<node> trail;
 
     // For weighted graphs
-    std::vector<tlx::d_ary_addressable_int_heap<node, 2, Less<edgeweight>>> dijkstraHeaps;
+    std::vector<tlx::d_ary_addressable_int_heap<node, 2, Aux::LessInVector<edgeweight>>>
+        dijkstraHeaps;
     std::vector<std::vector<edgeweight>> distanceGlobal;
     edgeweight minEdgeWeight;
 
