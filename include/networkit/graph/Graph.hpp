@@ -96,10 +96,6 @@ class CurveballMaterialization;
  */
 class Graph final {
 
-    friend class ParallelPartitionCoarsening;
-    friend class GraphBuilder;
-    friend class CurveballDetails::CurveballMaterialization;
-
     // graph attributes
     //!< current number of nodes
     count n;
@@ -1041,6 +1037,28 @@ public:
      */
     void preallocateDirected(node u, size_t outSize, size_t inSize);
 
+    /**
+     * Reserves memory in the node's edge containers for directed graphs.
+     *
+     * @param u the node memory should be reserved for
+     * @param outSize the amount of memory to reserve for out edges
+     *
+     * This function is thread-safe if called from different
+     * threads on different nodes.
+     */
+    void preallocateDirectedOutEdges(node u, size_t outSize);
+
+    /**
+     * Reserves memory in the node's edge containers for directed graphs.
+     *
+     * @param u the node memory should be reserved for
+     * @param inSize the amount of memory to reserve for in edges
+     *
+     * This function is thread-safe if called from different
+     * threads on different nodes.
+     */
+    void preallocateDirectedInEdges(node u, size_t inSize);
+
     /** EDGE IDS **/
 
     /**
@@ -1465,6 +1483,15 @@ public:
     void setWeight(node u, node v, edgeweight ew);
 
     /**
+     * Set the weight to the i-th neighbour of u.
+     *
+     * @param[in]	u	endpoint of edge
+     * @param[in]	i	index of the nexight
+     * @param[in]	weight	edge weight
+     */
+    void setWeightAtIthNeighbor(Unsafe, node u, index i, edgeweight ew);
+
+    /**
      * Increase the weight of an edge. If the edge does not exist,
      * it will be inserted.
      *
@@ -1555,6 +1582,15 @@ public:
     }
 
     /**
+     * Returns the index of node v in the array of outgoing edges of node u.
+     *
+     * @param u Node
+     * @param v Node
+     * @return index of node v in the array of outgoing edges of node u.
+     */
+    index indexOfNeighbor(node u, node v) const { return indexInOutEdgeArray(u, v); }
+
+    /**
      * Return the i-th (outgoing) neighbor of @a u.
      *
      * @param u Node.
@@ -1580,6 +1616,34 @@ public:
         if (!hasNode(u) || i >= outEdges[u].size())
             return nullWeight;
         return isWeighted() ? outEdgeWeights[u][i] : defaultEdgeWeight;
+    }
+
+    /**
+     * Get i-th (outgoing) neighbor of @a u and the corresponding edge weight.
+     *
+     * @param u Node.
+     * @param i index; should be in [0, degreeOut(u))
+     * @return pair: i-th (outgoing) neighbor of @a u and the corresponding
+     * edge weight, or @c defaultEdgeWeight if unweighted.
+     */
+    std::pair<node, edgeweight> getIthNeighborWithWeight(node u, index i) const {
+        if (!hasNode(u) || i >= outEdges[u].size())
+            return {none, none};
+        return getIthNeighborWithWeight(unsafe, u, i);
+    }
+
+    /**
+     * Get i-th (outgoing) neighbor of @a u and the corresponding edge weight.
+     *
+     * @param u Node.
+     * @param i index; should be in [0, degreeOut(u))
+     * @return pair: i-th (outgoing) neighbor of @a u and the corresponding
+     * edge weight, or @c defaultEdgeWeight if unweighted.
+     */
+    std::pair<node, edgeweight> getIthNeighborWithWeight(Unsafe, node u, index i) const {
+        if (!isWeighted())
+            return {outEdges[u][i], defaultEdgeWeight};
+        return {outEdges[u][i], outEdgeWeights[u][i]};
     }
 
     /**

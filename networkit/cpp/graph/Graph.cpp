@@ -169,18 +169,33 @@ void Graph::preallocateUndirected(node u, size_t size) {
 }
 
 void Graph::preallocateDirected(node u, size_t outSize, size_t inSize) {
+    preallocateDirectedOutEdges(u, outSize);
+    preallocateDirectedInEdges(u, inSize);
+}
+
+void Graph::preallocateDirectedOutEdges(node u, size_t outSize) {
     assert(directed);
     assert(exists[u]);
-    inEdges[u].reserve(inSize);
     outEdges[u].reserve(outSize);
 
     if (weighted) {
-        inEdgeWeights[u].reserve(inSize);
         outEdgeWeights[u].reserve(outSize);
     }
     if (edgesIndexed) {
+        outEdges[u].reserve(outSize);
+    }
+}
+
+void Graph::preallocateDirectedInEdges(node u, size_t inSize) {
+    assert(directed);
+    assert(exists[u]);
+    inEdges[u].reserve(inSize);
+
+    if (weighted) {
+        inEdgeWeights[u].reserve(inSize);
+    }
+    if (edgesIndexed) {
         inEdgeIds[u].reserve(inSize);
-        outEdgeIds[u].reserve(outSize);
     }
 }
 /** PRIVATE HELPERS **/
@@ -269,12 +284,12 @@ edgeid Graph::edgeId(node u, node v) const {
     if (!edgesIndexed) {
         throw std::runtime_error("edges have not been indexed - call indexEdges first");
     }
+
     index i = indexInOutEdgeArray(u, v);
 
     if (i == none) {
         throw std::runtime_error("Edge does not exist");
     }
-
     edgeid id = outEdgeIds[u][i];
     return id;
 }
@@ -855,6 +870,10 @@ void Graph::increaseWeight(node u, node v, edgeweight ew) {
     }
 }
 
+void Graph::setWeightAtIthNeighbor(Unsafe, node u, index i, edgeweight ew) {
+    outEdgeWeights[u][i] = ew;
+}
+
 /** SUMS **/
 
 edgeweight Graph::totalEdgeWeight() const noexcept {
@@ -882,7 +901,65 @@ bool Graph::checkConsistency() const {
         });
     });
 
-    return noMultiEdges;
+    bool correctNodeUpperbound = (z == outEdges.size()) && ((directed ? z : 0) == inEdges.size())
+                                 && ((weighted ? z : 0) == outEdgeWeights.size())
+                                 && ((weighted && directed ? z : 0) == inEdgeWeights.size())
+                                 && ((edgesIndexed ? z : 0) == outEdgeIds.size())
+                                 && ((edgesIndexed && directed ? z : 0) == inEdgeIds.size());
+
+    if (!correctNodeUpperbound)
+        DEBUG("Saved node upper bound doesn't actually match the actual node upper bound!");
+
+    count NumberOfOutEdges = 0;
+    count NumberOfOutEdgeWeights = 0;
+    count NumberOfOutEdgeIds = 0;
+    for (index i = 0; i < outEdges.size(); i++) {
+        NumberOfOutEdges += outEdges[i].size();
+    }
+    if (weighted)
+        for (index i = 0; i < outEdgeWeights.size(); i++) {
+            NumberOfOutEdgeWeights += outEdgeWeights[i].size();
+        }
+    if (edgesIndexed)
+        for (index i = 0; i < outEdgeIds.size(); i++) {
+            NumberOfOutEdgeIds += outEdgeIds[i].size();
+        }
+
+    count NumberOfInEdges = 0;
+    count NumberOfInEdgeWeights = 0;
+    count NumberOfInEdgeIds = 0;
+    if (directed) {
+        for (index i = 0; i < inEdges.size(); i++) {
+            NumberOfInEdges += inEdges[i].size();
+        }
+        if (weighted)
+            for (index i = 0; i < inEdgeWeights.size(); i++) {
+                NumberOfInEdgeWeights += inEdgeWeights[i].size();
+            }
+        if (edgesIndexed)
+            for (index i = 0; i < inEdgeIds.size(); i++) {
+                NumberOfInEdgeIds += inEdgeIds[i].size();
+            }
+    }
+
+    if (!directed) {
+        NumberOfOutEdges = (NumberOfOutEdges + storedNumberOfSelfLoops) / 2;
+        if (weighted)
+            NumberOfOutEdgeWeights = (NumberOfOutEdgeWeights + storedNumberOfSelfLoops) / 2;
+        if (edgesIndexed)
+            NumberOfOutEdgeIds = (NumberOfOutEdgeIds + storedNumberOfSelfLoops) / 2;
+    }
+
+    bool correctNumberOfEdges = (m == NumberOfOutEdges) && ((directed ? m : 0) == NumberOfInEdges)
+                                && ((weighted ? m : 0) == NumberOfOutEdgeWeights)
+                                && ((weighted && directed ? m : 0) == NumberOfInEdgeWeights)
+                                && ((edgesIndexed ? m : 0) == NumberOfOutEdgeIds)
+                                && ((edgesIndexed && directed ? m : 0) == NumberOfInEdgeIds);
+
+    if (!correctNumberOfEdges)
+        DEBUG("Saved number of edges is incorrect!");
+
+    return noMultiEdges && correctNodeUpperbound && correctNumberOfEdges;
 }
 
 } /* namespace NetworKit */
